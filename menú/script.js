@@ -1,19 +1,19 @@
-// BUSCADOR DE CONTENIDO
+// Evento para mostrar el menú
+document.getElementById('icon-menu').addEventListener('click', function() {
+    document.querySelector('.menu').classList.toggle('show-lateral');
+});
 
-//Ejecutando funciones
+// Eventos del buscador
 document.getElementById("icon-search").addEventListener("click", mostrar_buscador);
-document.getElementById("cover-ctn-search").addEventListener("click", ocultar_buscador); 
+document.getElementById("cover-ctn-search").addEventListener("click", ocultar_buscador);
 
+// Declaración de variables del buscador
+let bars_search = document.getElementById("ctn-bars-search");
+let cover_ctn_search = document.getElementById("cover-ctn-search");
+let inputSearch = document.getElementById("inputSearch");
+let box_search = document.getElementById("box-search");
 
-
-// Declarando variables 
-bars_search = document.getElementById("ctn-bars-search");
-cover_ctn_search = document.getElementById("cover-ctn-search");
-inputSearch = document.getElementById("inputSearch");
-box_search = document.getElementById("box-search");
-
-//Funcion para mostrar el buscador 
-
+// Función para mostrar el buscador
 function mostrar_buscador(){
     bars_search.style.top="5rem";
     cover_ctn_search.style.display="block";
@@ -24,45 +24,34 @@ function mostrar_buscador(){
     }
 }
 
-//Funcion para ocultar el buscador
-
+// Función para ocultar el buscador
 function ocultar_buscador(){
     bars_search.style.top="-10rem";
     cover_ctn_search.style.display="none";
     inputSearch.value="";
-    inputSearch.value ="";
     box_search.style.display="none";
 }
 
-
-// Creando filtrado de busqueda 
-
+// Función para el filtrado de búsqueda
 document.getElementById("inputSearch").addEventListener("keyup", buscador_interno);
 
 function buscador_interno() {
-    filter = inputSearch.value.toUpperCase();
-    li = box_search.getElementsByTagName("li");
+    let filter = inputSearch.value.toUpperCase();
+    let li = box_search.getElementsByTagName("li");
 
-    // Recorriendo elementos a filtrar mediante los "li"
-    for (i = 0; i < li.length; i++){
-        a = li[i].getElementsByTagName("a")[0];
-        textValue = a.textContent || a.innerText;
+    for (let i = 0; i < li.length; i++){
+        let a = li[i].getElementsByTagName("a")[0];
+        let textValue = a.textContent || a.innerText;
 
-        if(textValue.toUpperCase().indexOf(filter) > -1){
+        if (textValue.toUpperCase().indexOf(filter) > -1){
             li[i].style.display = "";
-            box_search.style.display ="block";
-
-            if (inputSearch.value === ""){
-                box_search.style.display ="none";
-            }
-
-            a.addEventListener("click", ocultar_buscador);
-
+            box_search.style.display = "block";
         } else {
             li[i].style.display = "none";
         }
     }
 
-
-
+    if (inputSearch.value === "") {
+        box_search.style.display = "none";
+    }
 }
