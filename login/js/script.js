@@ -14,5 +14,3 @@ const btnSignIn = document.getElementById("sign-in"),
         containerFormRegister.classList.remove("hide")
     })
     
-
-    
