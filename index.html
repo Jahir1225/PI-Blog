@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Blog sobre Ecosistemas</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/e718b2ee5a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <!-- Navbar principal -->
+        <div class="header-content">
+            <div class="menu">
+                <nav class="main-navbar">
+                    <ul>
+                        <li class="blog-selected">
+                            <a class="blog-selected" href="../menú/index.html">
+                                <i class="fa-solid fa-house"></i> Home
+                            </a>
+                        </li>
+                        <li><a href="../about us/aboutUs.html"><i class="fa-solid fa-people-group"></i> About us</a></li>
+                        <li><a href="../contact/contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+                        <li><a href="../login/login.html"><i class="fa-solid fa-circle-user"></i> Log in</a></li>
+                        <li>
+                            <div class="main-navbar--ctn-icon-search">
+                                <i class="fa-solid fa-magnifying-glass" id="icon-search"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>  
+            </div>
+            <div id="icon-menu">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor del buscador -->
+    <div id="ctn-bars-search">
+        <input type="text" id="inputSearch" placeholder="¿Qué deseas buscar?" list="search-suggestions">
+        <datalist id="search-suggestions"></datalist>
+    </div>
+
+    <!-- Resultados de búsqueda -->
+    <ul id="box-search">
+        <li><a href="../blog1/blog1.html"><i class="fa-solid fa-magnifying-glass"></i> Ecosistemas terrestres</a></li>
+        <li><a href="../blog2/blog2.html"><i class="fa-solid fa-magnifying-glass"></i> Los campos</a></li>
+        <li><a href="../blog3/blog3.html"><i class="fa-solid fa-magnifying-glass"></i> Ecosistemas en lagos</a></li>
+        <li><a href="../blog4/blog4.html"><i class="fa-solid fa-magnifying-glass"></i> Hábitats de animales</a></li>
+        <li><a href="#b5"><i class="fa-solid fa-magnifying-glass"></i> Blog 5</a></li>
+        <li><a href="#b6"><i class="fa-solid fa-magnifying-glass"></i> Blog 6</a></li>
+    </ul>
+
+    <!-- Cover para el buscador -->
+    <div id="cover-ctn-search"></div>
+
+    <div class="container-all" id="move-content">
+        <div class="main-wrapper">
+            <div class="main-wrapper__container-cover">
+                <div class="container-cover--container-info-cover">
+                    <h1>Ecosistemas terrestres</h1>
+                    <p>Bosques, desiertos, montañas... cada ecosistema tiene su magia. Descubre cómo funcionan y por qué son clave para el planeta. 🌍✨</p>
+                </div>
+            </div>
+            <aside class="main-wrapper__secondary-navbar"></aside>
+
+            <div class="main-wrapper__center-content">
+                <main>
+                    <h2>Blogs más recientes</h2>
+                    <section class="blog-gallery">
+                        <div class="row">
+                            <div class="blog-item">
+                                <a href="../blog1/blog1.html">
+                                    <img src="../img/vacas.jpg!d" alt="Imagen de vacas">
+                                </a>
+                                <p>Los Ecosistemas son importantes porque...</p>
+                            </div>
+                            <div class="blog-item">
+                                <a href="../blog2/blog2.html">
+                                    <img src="../img/background-cover.jpg" alt="Imagen de campos">
+                                </a>
+                                <p>Los campos son lugares donde...</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="blog-item">
+                                <a href="../blog3/blog3.html">
+                                    <img src="../img/background-content.jpg" alt="Imagen de lagos">
+                                </a>
+                                <p>En los Lagos albergan gran variedad de...</p>
+                            </div>
+                            <div class="blog-item">
+                                <a href="../blog4/blog4.html">
+                                    <img src="../img/proteger-ecosistemas-e1622287266551.jpg" alt="Imagen de ecosistemas">
+                                </a>
+                                <p>Animales habitan este planeta hasta en...</p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+
+            <aside class="main-wrapper__contenido-relacionado">
+                <h2>Contenido relacionado</h2>
+                <p>Descubre más sobre los ecosistemas y su impacto en nuestro planeta.</p>
+            </aside>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer__grupo1">
+                    <div class="box">
+                        <figure>
+                            <a href="#">
+                                <img src="../img/vacas.jpg!d" alt="Imagen de vacas">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="box">
+                        <h2>Sobre nosotros</h2>
+                        <p>Somos un blog dedicado a la conservación de los ecosistemas y la biodiversidad.</p>
+                    </div>
+                    <div class="box">
+                        <h2>Síguenos</h2>
+                        <div class="red-social">
+                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="#" class="fa fa-instagram"></a>
+                            <a href="#" class="fa fa-twitter"></a>
+                            <a href="#" class="fa fa-youtube"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__grupo2">
+                    <small>© 2025 <b>Ecolima</b> - Todos los Derechos Reservados</small>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
