@@ -10,7 +10,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-image: url(../img/background-login.jpeg);
+    background-image: url(../img/mikuuu.jpg);
     background-size: cover;
 }
 
@@ -273,4 +273,42 @@ body {
         border-bottom-left-radius: 20px;
         border-top-right-radius: 0px;
     }
+}
+/* Estilos para la página de recuperar contraseña */
+.form-recover input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #333;
+}
+
+.form-recover input[type="submit"] {
+    background-color: #9191bd;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.form-recover input[type="submit"]:hover {
+    background-color: #7a7a9a;
+}
+
+/* Enlace para volver al login */
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
 }
