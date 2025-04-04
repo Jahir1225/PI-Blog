@@ -62,7 +62,80 @@ function buscador_interno() {
             li[i].style.display = "none";
         }
     }
-
-
-
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const postsContainer = document.querySelector(".posts");
+    let scrollAmount = 0;
+
+    function autoScroll() {
+        const postWidth = postsContainer.querySelector(".post").offsetWidth + 20; // Ancho del post + gap
+        scrollAmount += postWidth;
+
+        // Si llega al final, vuelve al inicio
+        if (scrollAmount >= postsContainer.scrollWidth - postsContainer.offsetWidth) {
+            scrollAmount = 0;
+        }
+
+        postsContainer.scrollTo({
+            left: scrollAmount,
+            behavior: "smooth", // Movimiento más fluido
+        });
+    }
+
+    // Ejecutar el desplazamiento automáticamente cada 1 segundo
+    setInterval(autoScroll, 3500);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const postsContainer = document.querySelector(".posts");
+    const leftArrow = document.querySelector(".left-arrow");
+    const rightArrow = document.querySelector(".right-arrow");
+    const postWidth = postsContainer.querySelector(".post").offsetWidth + 20; // Ancho del post + gap
+
+    let scrollAmount = 0;
+    const scrollSpeed = 1; // Velocidad del desplazamiento automático
+
+    // Función para desplazamiento automático
+    function autoScroll() {
+        scrollAmount += scrollSpeed;
+
+        if (scrollAmount >= postsContainer.scrollWidth - postsContainer.offsetWidth) {
+            scrollAmount = 0;
+        }
+
+        postsContainer.scrollTo({
+            left: scrollAmount,
+            behavior: "smooth",
+        });
+
+        requestAnimationFrame(autoScroll);
+    }
+
+    // Función para desplazarse hacia la izquierda
+    leftArrow.addEventListener("click", function () {
+        scrollAmount -= postWidth;
+        if (scrollAmount < 0) {
+            scrollAmount = 0; // Evitar desplazamiento negativo
+        }
+        postsContainer.scrollTo({
+            left: scrollAmount,
+            behavior: "smooth",
+        });
+    });
+
+    // Función para desplazarse hacia la derecha
+    rightArrow.addEventListener("click", function () {
+        scrollAmount += postWidth;
+        if (scrollAmount >= postsContainer.scrollWidth - postsContainer.offsetWidth) {
+            scrollAmount = postsContainer.scrollWidth - postsContainer.offsetWidth; // Evitar exceder el límite
+        }
+        postsContainer.scrollTo({
+            left: scrollAmount,
+            behavior: "smooth",
+        });
+    });
+
+    // Iniciar desplazamiento automático
+    autoScroll();
+});
