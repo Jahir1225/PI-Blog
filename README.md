@@ -1,3 +1,2 @@
 # PI-Blog
-Repositorio de el mejor Pi
-borren el pi 
+En esta rama puro login y mysql y no jaladas 
