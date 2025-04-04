@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>Blog sobre Ecosistemas</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maxmum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://kit.fontawesome.com/e718b2ee5a.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -19,19 +20,17 @@
             <div class="menu">
                 <nav class="main-navbar">
                     <ul>
-                        <li class="blog-selected">
-                            <a class="blog-selected" href="../menú/index.html">
-                                <i class="fa-solid fa-house"></i> Home
-                            </a>
-                        </li>
-                        <li><a href="../about us/aboutUs.html"><i class="fa-solid fa-people-group"></i> About us</a></li>
-                        <li><a href="../contact/contact.html"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-                        <li><a href="../login/login.html"><i class="fa-solid fa-circle-user"></i> Log in</a></li>
-                        <li>
-                            <div class="main-navbar--ctn-icon-search">
-                                <i class="fa-solid fa-magnifying-glass" id="icon-search"></i>
-                            </div>
-                        </li>
+                        <li><div class="header-content__logo-container">
+                            <img src="../img/logo-ecolima.png" alt="">
+                        </div></li>
+                        <li class="blog-selected" title="Menú Principal"><a class="blog-selected" href="../../menú/index.html"> <i class="fa-solid fa-house"></i> </a></li>
+                        <li title="¿Quiénes somos?"><a href="../../about us/aboutUs.html"> <i class="fa-solid fa-people-group"></i></a></li>
+                        <li title="¡Contactanos!"><a href="../../contact/contact.html"> <i class="fa-solid fa-envelope"></i></a></li>
+                        <li title="¡Inicia sesión!"><a href="../../login/login.html"> <i class="fa-solid fa-circle-user"></i></a></li>
+                        <li title="Busquedas"><div class="main-navbar--ctn-icon-search">
+                            <i class="fa-solid fa-magnifying-glass" id="icon-search"></i>
+                        </div></li>
+                        
                     </ul>
                 </nav>  
             </div>
@@ -40,96 +39,106 @@
             </div>
         </div>
     </header>
-
-    <!-- Contenedor del buscador -->
     <div id="ctn-bars-search">
-        <input type="text" id="inputSearch" placeholder="¿Qué deseas buscar?" list="search-suggestions">
-        <datalist id="search-suggestions"></datalist>
+        <input type="text" name="" id="inputSearch" placeholder="¿Qué deseas buscar?">
     </div>
-
-    <!-- Resultados de búsqueda -->
+    <!-- Resultados de busqueda  -->
     <ul id="box-search">
-        <li><a href="../blog1/blog1.html"><i class="fa-solid fa-magnifying-glass"></i> Ecosistemas terrestres</a></li>
-        <li><a href="../blog2/blog2.html"><i class="fa-solid fa-magnifying-glass"></i> Los campos</a></li>
-        <li><a href="../blog3/blog3.html"><i class="fa-solid fa-magnifying-glass"></i> Ecosistemas en lagos</a></li>
-        <li><a href="../blog4/blog4.html"><i class="fa-solid fa-magnifying-glass"></i> Hábitats de animales</a></li>
-        <li><a href="#b5"><i class="fa-solid fa-magnifying-glass"></i> Blog 5</a></li>
-        <li><a href="#b6"><i class="fa-solid fa-magnifying-glass"></i> Blog 6</a></li>
+        <li><a href="../posts/blog1/blog1.html" class="fa-solid fa-magnifying-glass"></i>Ecosistemas terrestres</a></li>
+        <li><a href="../posts/blog2/blog2.html"><i class="fa-solid fa-magnifying-glass"></i>Los campos</a></li>
+        <li><a href="../posts/blog3/blog3.html"><i class="fa-solid fa-magnifying-glass"></i>Ecosistemas en lagos</a></li>
+        <li><a href="../posts/blog4/blog4.html"><i class="fa-solid fa-magnifying-glass"></i>Habitats de animales</a></li>
+        <li><a href="#b5"><i class="fa-solid fa-magnifying-glass"></i>Blog 5</a></li>
+        <li><a href="#b6"><i class="fa-solid fa-magnifying-glass"></i>Blog 6</a></li>
     </ul>
 
-    <!-- Cover para el buscador -->
     <div id="cover-ctn-search"></div>
 
-    <div class="container-all" id="move-content">
+    <div class="container-all" id="move-content"> 
+        <!-- Contenedor del contenido principal de la pagina -->
         <div class="main-wrapper">
+            <!-- Contenedor de la portada -->
             <div class="main-wrapper__container-cover">
                 <div class="container-cover--container-info-cover">
-                    <h1>Ecosistemas terrestres</h1>
+                    <h1>Ecosistemas terrestres </h1> <!-- esto es importante, si el titulo no es reelevante con el contenido, cambiar por h2, el titulo tiene que principal se hace solo con un h1 -->
                     <p>Bosques, desiertos, montañas... cada ecosistema tiene su magia. Descubre cómo funcionan y por qué son clave para el planeta. 🌍✨</p>
                 </div>
             </div>
-            <aside class="main-wrapper__secondary-navbar"></aside>
-
+            <!-- Aside de la izquierda -->
+            <aside class="main-wrapper__secondary-navbar">
+                <div class="secondary-navbar--contenedor">
+                    <h2> <br> Información</h2>
+                <h3>Fecha</h3>
+                <p>29/03/2025</p>
+                <h3>Autor:</h3>
+                <p>Juanito</p>
+                <h3>Tema</h3>
+                <p>Ecosistemas terrestres.</p>
+                <h3>Mensaje</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic recusandae deleniti at perferendis pariatur voluptatibus beatae iste quia dolor maxime. Expedita aspernatur quae perferendis tempore rem, dolore eligendi in. Eos?</p>
+                </div>
+            </aside>
+            <!-- Contenido central -->
             <div class="main-wrapper__center-content">
                 <main>
+                    <!-- Links a los blogs -->
                     <h2>Blogs más recientes</h2>
                     <section class="blog-gallery">
                         <div class="row">
                             <div class="blog-item">
-                                <a href="../blog1/blog1.html">
-                                    <img src="../img/vacas.jpg!d" alt="Imagen de vacas">
-                                </a>
-                                <p>Los Ecosistemas son importantes porque...</p>
+                                <a href="../posts/blog1/blog1.html"><img src="../img/vacas.jpg!d" alt="Imagen 1"></a>
+                                <p>Los Ecosistemas son importantes
+        porque...</p>
                             </div>
                             <div class="blog-item">
-                                <a href="../blog2/blog2.html">
-                                    <img src="../img/background-cover.jpg" alt="Imagen de campos">
-                                </a>
-                                <p>Los campos son lugares donde...</p>
+                                <a href="../posts/blog2/blog2.html"><img src="../img/background-cover.jpg" alt="Imagen 1"></a>
+                                <p>Los campos son lugares
+        donde...</p>
+        
                             </div>
                         </div>
                         <div class="row">
                             <div class="blog-item">
-                                <a href="../blog3/blog3.html">
-                                    <img src="../img/background-content.jpg" alt="Imagen de lagos">
-                                </a>
-                                <p>En los Lagos albergan gran variedad de...</p>
+                                <a href="../posts/blog3/blog3.html"><img src="../img/background-content.jpg" alt="Imagen 1"></a>
+                                <p>En los Lagos alvergan gran
+        variedad de...</p>
                             </div>
                             <div class="blog-item">
-                                <a href="../blog4/blog4.html">
-                                    <img src="../img/proteger-ecosistemas-e1622287266551.jpg" alt="Imagen de ecosistemas">
-                                </a>
-                                <p>Animales habitan este planeta hasta en...</p>
+                                <a href="../posts/blog4/blog4.html"><img src="../img/proteger-ecosistemas-e1622287266551.jpg" alt="Imagen 1"></a>
+                                <p>Animales habitan este planeta 
+        hasta en...</p>
                             </div>
                         </div>
                     </section>
                 </main>
             </div>
-
-            <aside class="main-wrapper__contenido-relacionado">
-                <h2>Contenido relacionado</h2>
-                <p>Descubre más sobre los ecosistemas y su impacto en nuestro planeta.</p>
-            </aside>
+            <!-- Aside de la derecha -->
+            <div class="contenido-relacionado-content">
+                <aside class="main-wrapper__contenido-relacionado">
+                    <h2>Contenido relacionado</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi voluptate id porro hic rerum velit ducimus! Dignissimos, nostrum? Ullam excepturi dolore mollitia assumenda laborum, illum nobis soluta. Numquam, perferendis illo.</p>
+                </aside>
+            </div>
         </div>
-
         <footer class="footer">
             <div class="footer-content">
                 <div class="footer__grupo1">
                     <div class="box">
                         <figure>
                             <a href="#">
-                                <img src="../img/vacas.jpg!d" alt="Imagen de vacas">
+                                <img src="../img/logo-ecolima.png" alt="">
                             </a>
                         </figure>
                     </div>
                     <div class="box">
-                        <h2>Sobre nosotros</h2>
-                        <p>Somos un blog dedicado a la conservación de los ecosistemas y la biodiversidad.</p>
+                        <h2>¡Gracias por visitar!</h2>
+                        <p>Conservemos juntos los ecosistemas terrestres para un futuro más verde y saludable.</p>
+                        
                     </div>
                     <div class="box">
-                        <h2>Síguenos</h2>
+                        <h2>Siguenos</h2>
                         <div class="red-social">
-                            <a href="#" class="fa fa-facebook"></a>
+                            <a href="#" czlass="fa fa-facebook"></a>
                             <a href="#" class="fa fa-instagram"></a>
                             <a href="#" class="fa fa-twitter"></a>
                             <a href="#" class="fa fa-youtube"></a>
@@ -137,14 +146,13 @@
                     </div>
                 </div>
                 <div class="footer__grupo2">
-                    <small>© 2025 <b>Ecolima</b> - Todos los Derechos Reservados</small>
+                    <small>
+                        ©Copy;2022 <b>Ecolima</b> - Todos los Derechos Reservados
+                    </small>
                 </div>
             </div>
         </footer>
     </div>
-
     <script src="script.js"></script>
-
 </body>
 </html>
-

@@ -1,94 +1,108 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const barsSearch = document.getElementById("ctn-bars-search");
-    const coverSearch = document.getElementById("cover-ctn-search");
-    const inputSearch = document.getElementById("inputSearch");
-    const boxSearch = document.getElementById("box-search");
-    const items = boxSearch.getElementsByTagName("li");
-
-    // Crear un datalist para autocompletar
-    const dataList = document.createElement("datalist");
-    dataList.id = "search-suggestions";
-    document.body.appendChild(dataList);
-    inputSearch.setAttribute("list", "search-suggestions");
-
-    document.getElementById('icon-menu').addEventListener('click', () => {
-        document.querySelector('.menu').classList.toggle('show-lateral');
-    });
-
-    function normalizeText(text) {
-        return text
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "") // Elimina acentos
-            .toLowerCase(); // Convierte a minúsculas para mejor comparación
-    }
-
-    function searchHandler() {
-        const filter = normalizeText(inputSearch.value.trim());
-        let found = false;
-        let suggestions = [];
-        const fragment = document.createDocumentFragment();
-
-        for (let li of items) {
-            let link = li.querySelector("a");
-            let textValue = normalizeText(link.textContent || link.innerText);
-
-            if (textValue.includes(filter) && filter !== "") {
-                li.style.display = "block";
-                highlightMatch(link, filter);
-                found = true;
-                suggestions.push(link.textContent);
-            } else {
-                li.style.display = "none";
-                link.innerHTML = link.textContent;
-            }
-        }
-
-        boxSearch.style.display = found ? "block" : "none";
-        updateDataList(suggestions, fragment);
-    }
-
-    function highlightMatch(element, query) {
-        let text = element.textContent;
-        let regex = new RegExp(`(${query})`, "gi");
-        element.innerHTML = text.replace(regex, `<span style="background-color: yellow;">$1</span>`);
-    }
-
-    function updateDataList(suggestions, fragment) {
-        dataList.innerHTML = ""; // Limpiar opciones previas
-        suggestions.forEach(text => {
-            let option = document.createElement("option");
-            option.value = text;
-            fragment.appendChild(option);
-        });
-        dataList.appendChild(fragment);
-    }
-
-    let debounceTimer;
-    inputSearch.addEventListener("input", () => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(searchHandler, 200);
-    });
-
-    document.getElementById("icon-search").addEventListener("click", () => {
-        barsSearch.style.top = "5rem";
-        coverSearch.style.display = "block";
-        inputSearch.focus();
-    });
-
-    coverSearch.addEventListener("click", () => {
-        barsSearch.style.top = "-10rem";
-        coverSearch.style.display = "none";
-        inputSearch.value = "";
-        boxSearch.style.display = "none";
-    });
-
-    // Cierra la búsqueda al hacer clic en un resultado
-    boxSearch.addEventListener("click", (e) => {
-        if (e.target.tagName === "A") {
-            barsSearch.style.top = "-10rem";
-            coverSearch.style.display = "none";
-            inputSearch.value = "";
-            boxSearch.style.display = "none";
-        }
-    });
+// Evento para mostrar el menú
+document.getElementById('icon-menu').addEventListener('click', function() {
+    document.querySelector('.menu').classList.toggle('show-lateral');
 });
+
+// Eventos del buscador
+document.getElementById("icon-search").addEventListener("click", mostrar_buscador);
+document.getElementById("cover-ctn-search").addEventListener("click", ocultar_buscador);
+
+// Declaración de variables del buscador
+let bars_search = document.getElementById("ctn-bars-search");
+let cover_ctn_search = document.getElementById("cover-ctn-search");
+let inputSearch = document.getElementById("inputSearch");
+let box_search = document.getElementById("box-search");
+
+// Función para mostrar el buscador
+function mostrar_buscador(){
+    // Verifica si el tamaño de la pantalla es pequeño (menos de 800px)
+    if (window.innerWidth <= 800) {
+        // Cierra el menú lateral si está abierto
+        document.querySelector('.menu').classList.remove('show-lateral');
+    }
+
+    bars_search.style.top="5rem";
+    cover_ctn_search.style.display="block";
+    inputSearch.focus();
+
+    if (inputSearch.value === ""){
+        box_search.style.display ="none";
+    }
+}
+
+// Función para ocultar el buscador
+function ocultar_buscador(){
+    bars_search.style.top="-10rem";
+    cover_ctn_search.style.display="none";
+    inputSearch.value="";
+    box_search.style.display="none";
+}
+
+// Array of blog metadata with links and titles
+const blogMetadata = [
+    { link: "../blog1/blog1.html", title: "Ecosistemas terrestres" },
+    { link: "../blog2/blog2.html", title: "Los campos" },
+    { link: "../blog3/blog3.html", title: "Ecosistemas en lagos" },
+    { link: "../blog4/blog4.html", title: "Habitats de animales" },
+    // Add more blogs as needed
+];
+
+// Function to fetch and extract <p> content from blogs
+async function fetchBlogContent() {
+    const blogContent = [];
+
+    for (const blog of blogMetadata) {
+        try {
+            const response = await fetch(blog.link);
+            const htmlText = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, "text/html");
+            const paragraphs = Array.from(doc.querySelectorAll("p"));
+            const content = paragraphs.map(p => p.textContent).join(" ");
+            blogContent.push({ ...blog, content: content.toLowerCase() });
+        } catch (error) {
+            console.error(`Error fetching blog content from ${blog.link}:`, error);
+        }
+    }
+
+    return blogContent;
+}
+
+// Initialize blog content dynamically
+let blogContent = [];
+fetchBlogContent().then(content => blogContent = content);
+
+// Función para el filtrado de búsqueda
+document.getElementById("inputSearch").addEventListener("keyup", buscador_interno);
+
+function buscador_interno() {
+    let filter = inputSearch.value.toLowerCase();
+    let results = [];
+
+    // Match input with dynamically fetched <p> content
+    blogContent.forEach(blog => {
+        if (blog.content.includes(filter)) {
+            results.push(blog);
+        }
+    });
+
+    // Clear previous results
+    box_search.innerHTML = "";
+
+    // Display matched results
+    if (results.length > 0) {
+        results.forEach(blog => {
+            let li = document.createElement("li");
+            li.innerHTML = `<a href="${blog.link}"><i class="fa-solid fa-magnifying-glass"></i>${blog.title}</a>`;
+            box_search.appendChild(li);
+        });
+        box_search.style.display = "block";
+    } else {
+        box_search.style.display = "none";
+    }
+
+    // Hide suggestions if input is empty
+    if (inputSearch.value === "") {
+        box_search.style.display = "none";
+    }
+}
