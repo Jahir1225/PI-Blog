@@ -1,2 +1,2 @@
 # PI-Blog
-En esta rama puro login y mysql y no jaladas 
+En esta rama puro login, base de datos y no jaladas 
