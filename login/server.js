@@ -11,12 +11,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Conectar a la base de datos
+// Conexión base de datos
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root', // Asegúrate de que sea el usuario correcto
-    password: '', // Pon tu contraseña si tienes una
-    database: 'db_blog' // Asegúrate de que el nombre de la base de datos sea correcto
+    user: 'root', // Usuario
+    password: '', // Contraseña
+    database: 'db_blog' // Nombre de la base de datos
 });
 
 connection.connect(err => {
@@ -27,12 +27,12 @@ connection.connect(err => {
     console.log('Conectado a la base de datos');
 });
 
-// Ruta para probar el servidor
+// Ruta servidor
 app.get('/', (req, res) => {
     res.send('Servidor corriendo en http://localhost:3001');
 });
 
-// Ruta para registrar usuario
+// Ruta registrar usuario
 app.post('/registrar', (req, res) => {
     const { userName, userEmail, userPassword } = req.body;
 
@@ -40,7 +40,7 @@ app.post('/registrar', (req, res) => {
         return res.status(400).json({ success: false, message: "Faltan datos" });
     }
 
-    // Verificar si el correo ya está registrado
+    // Ruta verificar si correo está registrado
     const checkEmailQuery = 'SELECT * FROM users WHERE email = ?';
     connection.query(checkEmailQuery, [userEmail], (err, result) => {
         if (err) {
@@ -52,7 +52,7 @@ app.post('/registrar', (req, res) => {
             return res.status(400).json({ success: false, message: 'El correo electrónico ya está registrado' });
         }
 
-        // Si el correo no está registrado, encriptamos la contraseña y guardamos el usuario
+        // Si el correo no está registrado, registramos al usuario
         bcrypt.hash(userPassword, 10, (err, hashedPassword) => {
             if (err) {
                 console.error("Error al encriptar la contraseña:", err);
@@ -71,12 +71,12 @@ app.post('/registrar', (req, res) => {
         });
     });
 });
-// Ruta para login
+// Ruta login
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
 
-    console.log("🟡 Email recibido:", email);
-    console.log("🟡 Password recibido:", password);
+    console.log("🟡 Correo recibido:", email);
+    console.log("🟡 Contraseña recibida:", password);
 
     if (!email || !password) {
         return res.status(400).json({ success: false, message: "Faltan datos" });
@@ -120,6 +120,59 @@ app.post('/login', (req, res) => {
         });
     });
 });
+//Ruta reestablecer contraseña
+app.post("/restablecer-contrasena", async (req, res) => {
+    const { email, newPassword } = req.body;
+
+    if (!email || !newPassword) {
+        return res.status(400).json({ success: false, message: "Faltan datos" });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+        connection.query("UPDATE users SET password = ? WHERE email = ?", [hashedPassword, email], (err, result) => {
+            if (err) {
+                console.error("❌ Error al actualizar contraseña:", err);
+                return res.status(500).json({ success: false, message: "Error interno" });
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ success: false, message: "Correo no encontrado" });
+            }
+
+            return res.json({ success: true, message: "Contraseña actualizada correctamente" });
+        });
+
+    } catch (err) {
+        console.error("❌ Error en /restablecer-contrasena:", err);
+        return res.status(500).json({ success: false, message: "Error interno" });
+    }
+});
+
+// Ruta verificación de correo existente
+app.post('/recuperar', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ success: false, message: "Falta el correo" });
+    }
+
+    const query = 'SELECT * FROM users WHERE email = ?';
+    connection.query(query, [email], (err, results) => {
+        if (err) {
+            console.error("❌ Error al buscar email:", err);
+            return res.status(500).json({ success: false, message: "Error en el servidor" });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ success: false, message: "Correo no encontrado" });
+        }
+
+        res.json({ success: true, message: "Correo válido" });
+    });
+});
+
 
 
 
