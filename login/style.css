@@ -268,3 +268,23 @@ body {
 .forgot-password:hover {
     text-decoration: underline;
 }
+.btn-menu {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Color verde */
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.btn-menu:hover {
+    background-color: #45a049;
+}
+
