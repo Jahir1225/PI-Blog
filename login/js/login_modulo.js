@@ -36,8 +36,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     alertaExitoLogin.classList.add("alertaExito");
 
                     setTimeout(() => {
-                        location.href = "../menú/index.html";
+                        switch (data.role) {
+                            case "admin":
+                                location.href = "../menu/index.html";
+                                break;
+                            case "usuario":
+                                location.href = "../menu/index.html";
+                                break;
+                            default:
+                                location.href = "../menu/index.html"; // fallback
+                        }
                     }, 1500);
+                    
                 } else {
                     alertaErrorLogin.textContent = data.message || "Correo o contraseña incorrectos";
                     alertaErrorLogin.classList.add("alertaError");
