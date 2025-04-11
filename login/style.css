@@ -268,7 +268,7 @@ body {
 .forgot-password:hover {
     text-decoration: underline;
 }
-.btn-menu {
+.boton_regresar {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -284,7 +284,7 @@ body {
     z-index: 1000;
 }
 
-.btn-menu:hover {
+.boton_regresar:hover {
     background-color: #45a049;
 }
 
