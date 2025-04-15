@@ -1,3 +1,47 @@
+function ocultar_buscador(){
+    bars_search.style.top="-10rem";
+    cover_ctn_search.style.display="none";
+    inputSearch.value="";
+    inputSearch.value ="";
+    box_search.style.display="none";
+}
+
+function mostrar_buscador(){
+    bars_search.style.top="5rem";
+    cover_ctn_search.style.display="block";
+    inputSearch.focus();
+
+    if (inputSearch.value === ""){
+        box_search.style.display ="none";
+    }
+}
+
+//Funcion para mostrar el buscador 
+document.addEventListener("DOMContentLoaded", () => {
+    const iconMenu = document.getElementById('icon-menu');
+    const menu = document.querySelector('.menu');
+
+    if (iconMenu && menu) {
+        iconMenu.addEventListener('click', function () {
+            menu.classList.toggle('show-lateral');
+        });
+    }
+});
+// Función para ocultar el menú lateral al hacer clic fuera de él
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del DOM
+    const postForm = document.getElementById('postForm');
+    const fileInput = document.getElementById('real-input');
+    const mensajeAutorInput = document.getElementById('mensaje-autor');
+    const fileNameElement = document.querySelector('.file-name');
+    const imgAutorBtn = document.querySelector('.img-autor');
+    let isSubmitting = false;
+
+
+    const previewStyles = `
+/* estilo mínimo como ejemplo */
 body {
     margin: 0;
     font-family: sans-serif;
@@ -73,6 +117,7 @@ a {
 
 /* HEADER */
 
+
 .header {
     background-color: #003800;
     position: sticky;
@@ -137,6 +182,9 @@ nav a {
     text-decoration: none;
 }
 
+.main-navbar  .blog-selected {
+    color: #6B8E23;
+}
 
 .blog-selected::before{
     content: '';
@@ -180,10 +228,9 @@ font-size: 1.75rem;
 
 /* BUSQUEDAS SECTION */
 
-.main-navbar li[title="Busquedas"] {
-    color: #ffffff; /* Cambia el color del texto a blanco */
+.main-navbar i {
+    color: #e5dede;
 }
-
 
 .main-navbar--ctn-icon-search {
     margin-top: 0rem;
@@ -373,10 +420,10 @@ main {
     flex-direction: column; /* Asegurar que los elementos estén en columna */
     margin: 0 auto; /* Centrar el contenedor en la página */
     padding: 100px; /* Espaciado interno */
-    max-width: 60rem; /* Limitar el ancho del contenedor */
+    max-width: 650px; /* Limitar el ancho del contenedor */
     text-align: center; /* Centrar el texto */
     position: relative; /* Posicionar elementos hijos absolutamente */
-    overflow: visible   ; /* Evitar que el contenido se desborde */
+    overflow: hidden; /* Evitar que el contenido se desborde */
     padding: 20px; /* Espaciado interno */
 }
 
@@ -486,6 +533,23 @@ main {
     padding: 4px 10px;
     background: #686868;
     cursor: default;
+}
+
+.referencias {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-left: 4px solid #4CAF50;
+}
+
+.referencias h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.referencias div {
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 /*
@@ -648,36 +712,14 @@ main {
 .posts::-webkit-scrollbar {
     display: none; /* Ocultar barra de desplazamiento en Chrome, Edge y Safari */
 }
-
-/* Fechas de publicación */
-/* Estilo para las flechas */
-.arrow {
-    position: absolute; /* Posicionar dentro del contenedor */
-    top: 50%; /* Centrar verticalmente */
-    background-color: #007BFF; /* Color de fondo */
-    color: white; /* Color del texto */
-    border: none; /* Sin bordes */
-    border-radius: 50%; /* Forma circular */
-    width: 50px; /* Ancho */
-    height: 50px; /* Alto */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer; /* Cambiar el cursor al pasar */
-    z-index: 5; /* Asegurar que estén encima del contenido */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más definida */
-    transition: all 0.3s ease; /* Transición suave para hover */
-}
-
-
 /* Flecha izquierda */
 .left-arrow {
-    left: -2.5rem; /* Ajusta este valor para separarla más a la izquierda */
+    left: 5px; /* Ajusta este valor para separarla más a la izquierda */
 }
 
 /* Flecha derecha */
 .right-arrow {
-    right: -2.5rem; /* Ajusta este valor para separarla más a la derecha */
+    right: 5px; /* Ajusta este valor para separarla más a la derecha */
 }
 
 /* Hover en las flechas */
@@ -695,7 +737,7 @@ main {
 .posts {
     display: flex; /* Alinear los posts en fila */
     flex-wrap: nowrap; /* Evitar que los posts se envuelvan */
-    overflow-x: auto; /* Ocultar el contenido desbordado */
+    overflow: hidden; /* Ocultar el contenido desbordado */
     scroll-behavior: smooth; /* Desplazamiento suave */
 }
 
@@ -704,12 +746,13 @@ main {
     opacity: 1;
 }  
 .main-wrapper__secondary-navbar {
-    flex: 1 1 10%;
+    flex: 1 1 15%;
     padding: 2rem;
     padding-top: 0;
-    max-width: 1rem;
+    max-width: 15rem; /* antes era 1rem */
+    min-width: 8rem;   /* opcional: asegúrate de que tenga un mínimo */
     text-align: center;
-    background-color: #E8F0E8 ;
+    background-color: #E8F0E8;
 }
 
 .main-wrapper__secondary-navbar ul {
@@ -1270,3 +1313,338 @@ main {
     }
     
 }
+`;
+
+
+    document.getElementById('btn-preview').addEventListener('click', () => {
+        const mensajeAutor = mensajeAutorInput.value.trim();
+        const content = quill.root.innerHTML.trim();
+        const title = document.getElementById('post-title').value.trim();
+        const referencias = document.getElementById('referencias')?.value.trim() || '';
+        const tags = tagify.value.map(tag => tag.value).join(', ');
+        const fecha = new Date().toLocaleDateString();
+    
+        let imageSrc = '../img/default.jpg';
+    
+        if (fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                imageSrc = event.target.result;
+                renderPreview();
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            renderPreview();
+        }
+    
+        function renderPreview() {
+            const previewHTML = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>${title}</title>
+        <style>${previewStyles}</style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <style>
+            * { pointer-events: none; } /* 🔒 Desactiva navegación accidental */
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-content">
+                <div class="menu">
+                    <nav class="main-navbar">
+                        <ul>
+                            <li>
+                                <div class="header-content__logo-container">
+                                    <img src="../../../img/logo-ecolima.png" alt="">
+                                </div>
+                            </li>
+                            <li><a><i class="fa-solid fa-house"></i></a></li>
+                            <li class="blog-selected"><a class="blog-selected"><i class="fa-solid fa-newspaper"></i></a></li>
+                            <li><a><i class="fa-solid fa-people-group"></i></a></li>
+                            <li><a><i class="fa-solid fa-envelope"></i></a></li>
+                            <li><a><i class="fa-solid fa-circle-user"></i></a></li>
+                            <li><i class="fa-solid fa-magnifying-glass"></i></li>
+                        </ul>
+                    </nav>  
+                </div>
+            </div>
+        </header>
+    
+        <main style="padding: 2rem; max-width: 1000px; margin: auto;">
+            <h1>${title}</h1>
+            <p><strong>Fecha:</strong> ${fecha}</p>
+            <p><strong>Mensaje del autor:</strong> ${mensajeAutor}</p>
+            <img src="${imageSrc}" style="max-width: 100%; margin: 20px 0;" />
+            <div>${content}</div>
+            <section class="referencias" style="margin-top: 2rem;">
+                <h3>Referencias</h3>
+                <div>${referencias || 'Ninguna'}</div>
+            </section>
+            <section style="margin-top: 1rem;">
+                <strong>Etiquetas:</strong> ${tags}
+            </section>
+        </main>
+    </body>
+    </html>`;
+    
+            const blob = new Blob([previewHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const iframe = document.getElementById('iframe-preview');
+            iframe.src = url;
+            document.getElementById('preview-modal').style.display = 'block';
+        }
+    });
+    
+    // Cerrar vista previa
+    document.getElementById('btn-close-preview').addEventListener('click', () => {
+        document.getElementById('preview-modal').style.display = 'none';
+        postForm.requestSubmit();
+    });
+    
+    // Publicar desde vista previa
+    document.getElementById('btn-confirm-publish').addEventListener('click', () => {
+        document.getElementById('preview-modal').style.display = 'none';
+        postForm.requestSubmit();
+    });
+    
+    
+    // Inicializar Tagify
+    const tagInput = document.getElementById('post-tags');
+    const tagify = new Tagify(tagInput, {
+        maxTags: 3,
+        whitelist: ["naturaleza", "fauna", "flora", "medio ambiente", "biodiversidad", "lagos", "montañas"], // Opcional
+        dropdown: {
+            enabled: 0 // Sugerencias automáticas
+        }
+    });
+
+    // Inicializar Quill Editor
+    const quill = new Quill("#editor", {
+        theme: "snow",
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [{ 'header': [2, 3, 4, 5, 6, false] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],
+                ['link', 'image'],
+                ['video'],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                
+                ['clean']
+            ]
+        },
+        placeholder: 'Escribe tu contenido aquí...',
+        bounds: document.getElementById('editor')
+    });
+
+    quill.root.setAttribute("spellcheck", "true");
+
+
+    // Manejador de selección de archivos
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            
+            if (file) {
+                fileNameElement.textContent = file.name;
+                
+                // Vista previa de imagen
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    let preview = document.getElementById('preview');
+                    if (!preview) {
+                        preview = document.createElement('img');
+                        preview.id = 'preview';
+                        preview.style.maxWidth = '100%';
+                        preview.style.maxHeight = '200px';
+                        preview.style.marginTop = '10px';
+                        preview.style.borderRadius = '4px';
+                        preview.style.objectFit = 'contain';
+                        document.querySelector('.img-autor--container').appendChild(preview);
+                    }
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                fileNameElement.textContent = 'No hay imagen seleccionada';
+                const preview = document.getElementById('preview');
+                if (preview) preview.style.display = 'none';
+            }
+        });
+    }
+
+    // Activar el input file al hacer clic en el botón
+    if (imgAutorBtn) {
+        imgAutorBtn.addEventListener('click', function() {
+            fileInput.click();
+        });
+    }
+
+    // Envío del formulario
+    if (postForm) {
+        postForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (isSubmitting) return; // ✅ Evita doble envío
+            isSubmitting = true;
+            const submitBtn = postForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publicando...';
+
+            try {
+                // Validación básica
+                const mensajeAutor = mensajeAutorInput.value.trim();
+                const editorContent = quill.root.innerHTML.trim();
+                const postTitle = document.getElementById('post-title').value.trim();
+                const postTags = document.getElementById('post-tags').value.trim();
+                
+                
+                if (!mensajeAutor || editorContent === '<p><br></p>') {
+                    throw new Error('Por favor completa todos los campos requeridos');
+                }
+
+                // Crear FormData
+                const formData = new FormData();
+                formData.append('user_id', '1'); // Cambiar por ID real del usuario logueado
+                formData.append('content', editorContent);
+                formData.append('mensaje_autor', mensajeAutor);
+                formData.append('title', postTitle);
+                formData.append('tags', postTags);
+                const referencias = document.getElementById('referencias').value.trim();
+                formData.append('referencias', referencias);
+
+
+
+                
+
+                if (!mensajeAutor || editorContent === '<p><br></p>' || !postTitle || !postTags) {
+                    throw new Error('Por favor completa todos los campos requeridos');
+                }
+                
+                // Validar y añadir imagen
+                if (fileInput.files[0]) {
+                    if (fileInput.files[0].size > 5 * 1024 * 1024) {
+                        throw new Error('La imagen no debe exceder los 5MB');
+                    }
+                    formData.append('image', fileInput.files[0]);
+                }
+
+                // Enviar datos al servidor
+                const response = await fetch('http://localhost:3001/api/posts', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Error en el servidor');
+                }
+
+                const data = await response.json();
+
+                // Éxito - resetear formulario
+                showAlert('✅ Post creado exitosamente!', 'success');
+                quill.root.innerHTML = '';
+                mensajeAutorInput.value = '';
+                fileInput.value = '';
+                fileNameElement.textContent = 'No hay imagen seleccionada';
+                const preview = document.getElementById('preview');
+                if (preview) preview.style.display = 'none';
+                
+                // Recargar posts
+                await loadPosts();
+                document.getElementById('post-title').value = '';
+                document.getElementById('post-tags').value = '';
+
+            } catch (error) {
+                console.error("Error al enviar el formulario:", error);
+                showAlert(`❌ ${error.message}`, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+                isSubmitting = false; // ✅ Permite futuros envíos
+            }        
+        });
+    }
+
+    // Cargar posts al iniciar
+    loadPosts();
+});
+
+// Función para cargar y mostrar posts
+async function loadPosts() {
+    try {
+        const response = await fetch('http://localhost:3001/api/posts');
+        
+        if (!response.ok) {
+            throw new Error('Error al cargar los posts');
+        }
+
+        const { success, posts } = await response.json();
+        
+        if (success && posts) {
+            const container = document.getElementById('posts-container');
+            if (container) {
+                container.innerHTML = posts.map(post => `
+                    <article class="post-card">
+                        <div class="post-content">${post.content}</div>
+                        ${post.imageUrl ? `<img src="${post.imageUrl}" alt="Imagen del post" class="post-image">` : ''}
+                        <div class="post-meta">
+                            <span class="post-author">Por: ${post.author_name || 'Anónimo'}</span>
+                            <span class="post-date">${new Date(post.created_at).toLocaleDateString()}</span>
+                        </div>
+                        <blockquote class="post-message">${post['mensaje-autor']}</blockquote>
+                    </article>
+                `).join('');
+            }
+        }
+    } catch (error) {
+        console.error("Error al cargar posts:", error);
+        showAlert('Error al cargar los posts', 'error');
+    }
+}
+
+// Función para mostrar alertas
+function showAlert(message, type = 'info') {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type}`;
+    alertDiv.textContent = message;
+    alertDiv.style.position = 'fixed';
+    alertDiv.style.top = '20px';
+    alertDiv.style.right = '20px';
+    alertDiv.style.padding = '10px 20px';
+    alertDiv.style.borderRadius = '4px';
+    alertDiv.style.zIndex = '1000';
+    alertDiv.style.backgroundColor = type === 'error' ? '#ffebee' : '#e8f5e9';
+    alertDiv.style.color = type === 'error' ? '#c62828' : '#2e7d32';
+    alertDiv.style.border = `1px solid ${type === 'error' ? '#ef9a9a' : '#a5d6a7'}`;
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.style.opacity = '0';
+        setTimeout(() => alertDiv.remove(), 300);
+    }, 5000);
+}
+
+// Advertencia al salir con cambios no guardados
+window.addEventListener('beforeunload', (e) => {
+    const quill = document.querySelector('#editor') ? new Quill('#editor') : null;
+    const mensajeAutor = document.getElementById('mensaje-autor')?.value.trim();
+    const hasFile = document.getElementById('real-input')?.files.length > 0;
+    
+    const hasContent = (quill && quill.root.innerHTML.trim() !== '<p><br></p>') || 
+                    (mensajeAutor && mensajeAutor !== '') || 
+                    hasFile;
+    
+    if (hasContent) {
+        e.preventDefault();
+        e.returnValue = 'Tienes cambios no guardados. ¿Seguro que quieres salir?';
+    }
+});
