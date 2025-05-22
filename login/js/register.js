@@ -1,36 +1,34 @@
-// Regex para validaciones
 export const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 export const passwordRegex = /^.{4,12}$/;
+const userNameRegex = /^[a-zA-Z0-9_-]{4,16}$/;
 
-const userNameRegex = /^[a-zA-Z0-9\_\-]{4,16}$/;
-
-// Estado de validación de los campos
 export const estadoValidacionCampos = {
     userName: false,
     userEmail: false,
     userPassword: false,
 };
 
-// Elementos del formulario de registro
 const formRegister = document.querySelector(".form-register");
-const inputUser = document.querySelector(".form-register input[type='text']");
-const inputEmail = document.querySelector(".form-register input[type='email']");
-const inputPass = document.querySelector(".form-register input[type='password']");
+const inputUser = document.querySelector(".form-register input[name='userName']");
+const inputEmail = document.querySelector(".form-register input[name='userEmail']");
+const inputPass = document.querySelector(".form-register input[name='userPassword']");
 const alertaError = document.querySelector(".form-register .alerta-error");
 const alertaExito = document.querySelector(".form-register .alerta-exito");
 
-// Lógica del DOM
+
 document.addEventListener("DOMContentLoaded", () => {
     formRegister.addEventListener("submit", (e) => {
-        e.preventDefault(); // Evitar que el formulario se envíe
+        e.preventDefault();
 
         if (estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
             enviarFormulario(formRegister, alertaError, alertaExito);
         } else {
             alertaError.textContent = "Por favor, completa todos los campos correctamente.";
             alertaError.classList.add("alertaError");
+            alertaError.style.display = "block";
             setTimeout(() => {
                 alertaError.classList.remove("alertaError");
+                alertaError.style.display = "none";
             }, 3000);
         }
     });
@@ -48,48 +46,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Validación de campos individuales
-export function validarCampo(regularExpresion, campo, mensaje) {
-    const esValido = regularExpresion.test(campo.value);
-    if (esValido) {
-        eliminarAlerta(campo.parentElement.parentElement);
-        estadoValidacionCampos[campo.name] = true;
-        campo.parentElement.classList.remove("error");
-    } else {
-        estadoValidacionCampos[campo.name] = false;
-        mostrarAlerta(campo.parentElement.parentElement, mensaje);
-        campo.parentElement.classList.add("error");
+export function validarCampo(regex, input, mensaje) {
+    const form = input.closest("form");
+    const isRegisterForm = form.classList.contains("form-register");
+    const isValid = regex.test(input.value.trim());
+    estadoValidacionCampos[input.name] = isValid;
+
+    if (!isRegisterForm) return;
+
+    const container = input.closest("div");
+    let mensajeError = container.querySelector(".mensaje-error");
+
+    if (!mensajeError) {
+        mensajeError = document.createElement("p");
+        mensajeError.classList.add("mensaje-error");
+        container.appendChild(mensajeError);
     }
+
+    mensajeError.textContent = isValid ? "" : mensaje;
+    mensajeError.style.display = isValid ? "none" : "block";
 }
 
-// Mostrar alerta debajo del campo
-function mostrarAlerta(referencia, mensaje) {
-    eliminarAlerta(referencia);
-    const alertaDiv = document.createElement("div");
-    alertaDiv.classList.add("alerta");
-    alertaDiv.textContent = mensaje;
-    referencia.appendChild(alertaDiv);
-}
-
-// Eliminar alerta anterior
-function eliminarAlerta(referencia) {
-    const alerta = referencia.querySelector(".alerta");
-    if (alerta) alerta.remove();
-}
-
-// Acción al enviar el formulario correctamente
 export function enviarFormulario(form, alertaError, alertaExito) {
     alertaExito.textContent = "Te registraste correctamente";
     alertaExito.classList.add("alertaExito");
+    alertaExito.style.display = "block";
+
     alertaError.classList.remove("alertaError");
+    alertaError.style.display = "none";
+
     form.reset();
 
-    // Reiniciar estado
     estadoValidacionCampos.userName = false;
     estadoValidacionCampos.userEmail = false;
     estadoValidacionCampos.userPassword = false;
 
     setTimeout(() => {
         alertaExito.classList.remove("alertaExito");
+        alertaExito.style.display = "none";
     }, 3000);
 }
+

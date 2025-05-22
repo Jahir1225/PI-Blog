@@ -1,78 +1,96 @@
-import { validarCampo, emailRegex, passwordRegex, estadoValidacionCampos, enviarFormulario } from "./register.js";
+import {
+    validarCampo,
+    emailRegex,
+    passwordRegex,
+    estadoValidacionCampos
+} from "./register.js";
 
 const formLogin = document.querySelector(".form-login");
-const inputEmail = document.querySelector(".form-login input[type='email']");
-const inputPass = document.querySelector(".form-login input[type='password']");
-const alertaErrorLogin = document.querySelector(".form-login .alerta-error");
-const alertaExitoLogin = document.querySelector(".form-login .alerta-exito");
+const inputEmail = formLogin.querySelector("input[name='userEmail']");
+const inputPass = formLogin.querySelector("input[name='userPassword']");
+const alertaErrorLogin = formLogin.querySelector(".alerta-error");
+const alertaExitoLogin = formLogin.querySelector(".alerta-exito");
+const loader = document.getElementById("loader");
+
+// Mostrar/ocultar contraseña
+const togglePassword = document.getElementById("toggleLoginPassword");
+const passwordInput = document.getElementById("loginPasswordInput");
+
+if (togglePassword && passwordInput) {
+    togglePassword.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        togglePassword.className = isPassword ? 'bx bx-hide toggle-password' : 'bx bx-show toggle-password';
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Escuchar envío del formulario
-    formLogin.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        validarCampo(emailRegex, inputEmail, "El correo solo puede contener letras, números, puntos, guiones y guion bajo.");
-        validarCampo(passwordRegex, inputPass, "La contraseña tiene que ser de 4 a 12 dígitos.");
-
-        if (estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
-            const email = inputEmail.value.trim();
-            const password = inputPass.value.trim();
-
-            // Enviar datos al backend
-            fetch("http://localhost:3001/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    localStorage.setItem("userName", data.name);
-                localStorage.setItem("userRole", data.role);
-
-                    alertaExitoLogin.textContent = "Inicio de sesión exitoso";
-                    alertaExitoLogin.classList.add("alertaExito");
-
-                    setTimeout(() => {
-                        switch (data.role) {
-                            case "admin":
-                                location.href = "../menu/index.html";
-                                break;
-                            case "usuario":
-                                location.href = "../menu/index.html";
-                                break;
-                            default:
-                                location.href = "../menu/index.html"; // fallback
-                        }
-                    }, 1500);
-                    
-                } else {
-                    alertaErrorLogin.textContent = data.message || "Correo o contraseña incorrectos";
-                    alertaErrorLogin.classList.add("alertaError");
-                    setTimeout(() => alertaErrorLogin.classList.remove("alertaError"), 3000);
-                }
-            })
-            .catch(error => {
-                console.error("Error en el login:", error);
-                alertaErrorLogin.textContent = "Hubo un error al intentar iniciar sesión.";
-                alertaErrorLogin.classList.add("alertaError");
-                setTimeout(() => alertaErrorLogin.classList.remove("alertaError"), 3000);
-            });
-        } else {
-            alertaErrorLogin.textContent = "Por favor, completa todos los campos correctamente.";
-            alertaErrorLogin.classList.add("alertaError");
-            setTimeout(() => alertaErrorLogin.classList.remove("alertaError"), 3000);
-        }
-    });
+    alertaErrorLogin.style.display = "none";
+    alertaExitoLogin.style.display = "none";
+    loader.classList.add("hide");
 
     // Validación en tiempo real
     inputEmail.addEventListener("input", () => {
-        validarCampo(emailRegex, inputEmail, "El correo solo puede contener letras, números, puntos, guiones y guion bajo.");
+        validarCampo(emailRegex, inputEmail, "El correo no es válido.");
     });
 
     inputPass.addEventListener("input", () => {
-        validarCampo(passwordRegex, inputPass, "La contraseña tiene que ser de 4 a 12 dígitos.");
+        validarCampo(passwordRegex, inputPass, "La contraseña debe tener entre 4 y 12 caracteres.");
+    });
+
+    formLogin.addEventListener("submit", (e) => {
+        e.preventDefault();  // ✅ Previene el envío por navegador
+
+        validarCampo(emailRegex, inputEmail, "El correo no es válido.");
+        validarCampo(passwordRegex, inputPass, "La contraseña debe tener entre 4 y 12 caracteres.");
+
+        if (estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
+            loader.classList.remove("hide");
+
+            fetch("http://localhost:3001/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: inputEmail.value.trim(),
+                    password: inputPass.value.trim(),
+                }),
+            })
+            .then(res => res.json())
+            .then(data => {
+                loader.classList.add("hide");
+
+                if (data.success) {
+                    localStorage.setItem("userName", data.name);
+                    localStorage.setItem("userRole", data.role);
+                    location.href = "../menu/index.html";
+                } else {
+                    mostrarMensajeError("Correo o contraseña incorrectos");
+                }
+            })
+            .catch(() => {
+                loader.classList.add("hide");
+                mostrarMensajeError("Error al iniciar sesión");
+            });
+        } else {
+            mostrarMensajeError("Por favor, completa todos los campos correctamente.");
+        }
     });
 });
+
+// ✅ Estas funciones deben ir afuera del DOMContentLoaded
+
+function mostrarMensajeError(msg) {
+    alertaErrorLogin.textContent = msg;
+    alertaErrorLogin.classList.add("alertaError");
+    alertaErrorLogin.style.display = "block";
+
+    setTimeout(() => {
+        ocultarMensajeError();
+    }, 3000);
+}
+
+function ocultarMensajeError() {
+    alertaErrorLogin.style.display = "none";
+    alertaErrorLogin.classList.remove("alertaError");
+    alertaErrorLogin.textContent = "";
+}
