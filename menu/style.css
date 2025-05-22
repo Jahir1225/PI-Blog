@@ -25,29 +25,161 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 2.5rem; 
-    color: #2E7D32; 
-    font-weight: bold;
+    font-size: 3.8rem;
+    font-weight: 800;
+    color: #ffffff;
     text-align: center;
-    margin-bottom: 20px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 3rem 0;
+    padding: 1rem 2rem;
+    text-shadow:
+        0 -10px 20px rgba(255, 255, 255, 0.25), /* leve luz superior */
+        0 4px 12px rgba(0, 0, 0, 0.5); /* sombra inferior */
+    animation: floatIn 1.2s ease-out forwards;
+    opacity: 0;
+}
+
+/* Franja blanca difusa por debajo */
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50rem; /* ← Aquí puedes poner el tamaño que quieras */
+    height: 8px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 80%);
+    filter: blur(6px);
+    border-radius: 50%;
+    opacity: 0;
+    animation: glowFade 1.2s ease-out 0.6s forwards;
+}
+
+
+/* Animación del texto */
+@keyframes floatIn {
+    0% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animación de la franja */
+@keyframes glowFade {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.1);
+    }
 }
 
 h2 {
-    font-size: 2rem;
-    color: #388E3C; 
-    font-weight: 600;
-    border-bottom: 2px solid #A5D6A7; 
-    padding-bottom: 5px;
-    margin-top: 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: transparent;
+    background: linear-gradient(90deg, #2e7d32, #66bb6a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-transform: uppercase;
+    position: relative;
+    margin: 3rem 0 1.5rem;
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    letter-spacing: 1.2px;
 }
 
-h3 {
-    font-size: 1.5rem;
-    color: #4CAF50;
-    font-weight: 500;
-    margin-top: 20px;
-    text-transform: uppercase; 
+/* Subrayado animado */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background: linear-gradient(to right, #81c784, #388e3c);
+    border-radius: 2px;
+    animation: underlineGrow 1.2s ease-out 0.4s forwards;
 }
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animación del subrayado */
+@keyframes underlineGrow {
+    to {
+        width: 28rem;
+    }
+}
+
+
+
+h3 {
+    font-size: 1.4rem;
+    color: #2e7d32;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    border-left: 6px solid #a5d6a7;
+    padding-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+h3:hover {
+    color: #1b5e20;
+    border-left-color: #66bb6a;
+}
+
+/* H4 - Para subtítulos importantes */
+h4 {
+    font-size: 1.25rem;
+    color: #388e3c;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 1.5rem 0 0.5rem;
+    border-left: 4px solid #a5d6a7;
+    padding-left: 1rem;
+    letter-spacing: 1px;
+}
+
+/* H5 - Para secciones secundarias o notas */
+h5 {
+    font-size: 1.1rem;
+    color: #4caf50;
+    font-weight: 500;
+    margin: 1.2rem 0 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 3px dashed #c8e6c9;
+    text-transform: capitalize;
+}
+
+/* H6 - Para aclaraciones, detalles o mini títulos */
+h6 {
+    font-size: 1rem;
+    color: #66bb6a;
+    font-weight: 400;
+    font-style: italic;
+    margin: 1rem 0 0.5rem;
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
 
 p {
     /* Propiedades compatibles con todos los navegadores */
@@ -72,8 +204,6 @@ a {
 }
 
 /* HEADER */
-
-
 .header {
     background-color: #003800;
     position: sticky;
@@ -111,7 +241,7 @@ a {
 
 .main-navbar ul li:first-child {
     margin-left: 5rem;
-    margin-right: 18rem;
+    margin-right: 10rem;
 }
 
 
@@ -182,14 +312,92 @@ font-size: 1.75rem;
     background-color: #2E7D32;
 }
 
+
 /* BUSQUEDAS SECTION */
 
-.main-navbar i {
+.main-navbar li[title="Busquedas"] {
+    color: #ffffff; /* Cambia el color del texto a blanco */
+}
+
+.main-navbar li {
+    list-style: none;
+    margin: 0.25rem 2.5rem;
+    position: relative;
+}
+
+.main-navbar li:hover a{
+    color: #6B8E23; 
+}
+
+.main-navbar a {
     color: #e5dede;
+    display: inline-block;
+    padding: 0.375rem 0.5625rem;
+    transition: color 300ms;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+.main-navbar  .blog-selected {
+    color: #6B8E23;
+}
+
+.blog-selected::before{
+    content: '';
+    width: 100%;
+    height: .25rem;
+    background-color: #54b324;
+    position: absolute;
+    top: -1.27rem;
+    left: 0;
+}
+
+.menu nav ul li a i {
+    display: inline;
+    font-size: 1.8rem;
+}
+
+#icon-search {
+font-size: 1.75rem;
+}
+
+#icon-menu {
+    width: 2.75rem;
+    height: 2.75rem;
+    position: fixed;
+    right: 2rem;
+    top: .85rem;
+    color: #e5dede;
+    background-color: #388E3C;
+    border-radius: 100%;
+    justify-content:center;
+    align-items: center;
+    display: none;
+    cursor: pointer;
+    padding: 1rem;
+
+}
+
+#icon-menu:hover {
+    background-color: #2E7D32;
+}
+
+
+/* BUSQUEDAS SECTION */
+
+.main-navbar li {
+    list-style: none;
+}
+
+.main-navbar li:not(:first-child) {
+    margin: 0.25rem 2.5rem; /* Ajusta el margen según la separación deseada */
+    position: relative;
 }
 
 .main-navbar--ctn-icon-search {
-    margin-top: 0rem;
+    margin-top: .45rem;
     margin-left: 5rem;
     cursor: pointer;
 
@@ -201,7 +409,6 @@ font-size: 1.75rem;
     height: 6rem;
     display: flex;
     justify-content: center;
-    
 }
 
 #ctn-icon-search i {
@@ -263,18 +470,8 @@ font-size: 1.75rem;
     height: 100vh;
     position: fixed;
     left: 0; 
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 7;
-    top: 0;
-    display: none;
-}
+    background: rgba(0,0,0, 0.5); /* blanco con 80% de opacidad */
 
-#cover-ctn-search {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    left: 0; 
-    background: rgba(0, 0, 0, 0.5);
     z-index: 7;
     top: 0;
     display: none;
@@ -376,10 +573,10 @@ main {
     flex-direction: column; /* Asegurar que los elementos estén en columna */
     margin: 0 auto; /* Centrar el contenedor en la página */
     padding: 100px; /* Espaciado interno */
-    max-width: 650px; /* Limitar el ancho del contenedor */
+    max-width: 60rem; /* Limitar el ancho del contenedor */
     text-align: center; /* Centrar el texto */
     position: relative; /* Posicionar elementos hijos absolutamente */
-    overflow: hidden; /* Evitar que el contenido se desborde */
+    overflow: visible   ; /* Evitar que el contenido se desborde */
     padding: 20px; /* Espaciado interno */
 }
 
@@ -498,6 +695,7 @@ main {
 }*/
 /* Contenedor principal que incluye el contenido y el aside */
 .main-content {
+    align-items: flex-start; /* Alinear los elementos al inicio verticalmente */
     display: flex; /* Activar Flexbox */
     justify-content: space-between; /* Espaciado entre el contenido principal y el aside */
     align-items: flex-start; /* Alinear los elementos al inicio verticalmente */
@@ -525,8 +723,162 @@ main {
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra opcional */
     max-width: 300px; /* Limitar el ancho del aside */
+    display: flex; /* Activar Flexbox */
+    flex-direction: column; /* Alinear los elementos en columna */
+    overflow: hidden; /* Evitar que el contenido se desborde */
+    position: relative; /* Posicionar elementos hijos absolutamente */
+    align-items: center; /* Centrar contenido horizontalmente */
+    height: 50rem;
 }
 
+/* Contenedor del carrusel */
+.related-items-container {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    scroll-snap-type: y mandatory; /* Activa el desplazamiento suave */
+    height: 36rem; /* Altura fija del contenedor */
+    gap: 10px; /* Espaciado entre los elementos */
+    background-color: #f5f5f5; /* Fondo claro para destacar los elementos */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+}
+
+
+/* todos los posts */
+
+.all-posts-section {
+    padding: 2rem;
+    background-color: #f8f8f8;
+}
+
+.all-posts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.post-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 250px;
+    text-align: center;
+}
+
+.post-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.post-card h3 {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+
+/* Estilo para cada elemento relacionado */
+.related-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    box-sizing: border-box;
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para hover */
+}
+
+/* Efecto hover para los elementos relacionados */
+.related-item:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+/* Títulos dentro de los elementos relacionados */
+.related-item h4 {
+    font-size: 1.2rem; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+    margin-bottom: 5px; /* Espaciado inferior */
+}
+
+/* Texto descriptivo dentro de los elementos relacionados */
+.related-item p {
+    font-size: 0.9rem; /* Tamaño del texto */
+    color: #666; /* Color gris */
+    margin-bottom: 10px; /* Espaciado inferior */
+}
+
+
+/* Botones de navegación */
+.carousel-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.carousel-button:hover {
+    background-color: #0056b3;
+}
+
+/* Opcional: Ajusta el tamaño de las imágenes */
+.related-item img {
+    max-width: 150px; /* Ajusta el tamaño máximo de la imagen */
+    margin-bottom: 10px;
+}
+
+/* Opcional: Estilo para el botón */
+.related-item button {
+    margin-top: 10px;
+    padding: 10px 50px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif; /* Cambia la fuente */
+    font-size: 1rem; /* Ajusta el tamaño del texto */
+    font-weight: bold; /* Hace el texto más grueso */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra en el texto */
+}
+
+.related-item button:hover {
+    background-color: #0056b3;
+}
+
+/* Ocultar la barra de desplazamiento vertical */
+.related-items-container {
+    scrollbar-width: none; /* Ocultar barra en Firefox */
+    -ms-overflow-style: none; /* Ocultar barra en Internet Explorer y Edge */
+}
+
+.related-items-container::-webkit-scrollbar {
+    display: none; /* Ocultar barra en Chrome, Safari y Edge */
+}
+
+
+
+/* Estilo para el contenedor de los elementos relacionados */
 .posts {
     scrollbar-width: none; /* Ocultar barra de desplazamiento en Firefox */
 }
@@ -558,12 +910,12 @@ main {
 
 /* Flecha izquierda */
 .left-arrow {
-    left: 5px; /* Ajusta este valor para separarla más a la izquierda */
+    left: -2.5rem; /* Ajusta este valor para separarla más a la izquierda */
 }
 
 /* Flecha derecha */
 .right-arrow {
-    right: 5px; /* Ajusta este valor para separarla más a la derecha */
+    right: -2.5rem; /* Ajusta este valor para separarla más a la derecha */
 }
 
 /* Hover en las flechas */
@@ -581,7 +933,7 @@ main {
 .posts {
     display: flex; /* Alinear los posts en fila */
     flex-wrap: nowrap; /* Evitar que los posts se envuelvan */
-    overflow: hidden; /* Ocultar el contenido desbordado */
+    overflow-x: auto; /* Ocultar el contenido desbordado */
     scroll-behavior: smooth; /* Desplazamiento suave */
 }
 
@@ -620,13 +972,22 @@ main {
     flex: 1 1 20%;
     padding: 2rem;
     padding-top: 0;
-
+    position: sticky;
+    top: 2rem; /* Espacio desde la parte superior al hacer scroll */
+    height: fit-content; /* Mantiene el tamaño ajustado al contenido */
 }
 
 .contenido-relacionado-content {
     flex: 1 1 20%; 
     
 }
+
+.contenido-relacionado-content h2::after {
+    content: none !important;
+    display: none !important;
+    animation: none !important;
+}
+
 
 .related-item img {
     width: 20rem;
@@ -664,9 +1025,16 @@ main {
 
 .footer .footer__grupo1 .box h2{
 
+    margin-left: -3.5rem;
     margin-bottom: 2rem;
     font-size: 2rem;
     border-bottom: none;
+}
+
+.footer .footer__grupo1 .box h2::after {
+    content: none !important;
+    display: none !important;
+    animation: none !important;
 }
 
 .footer .footer__grupo1 .box p{
@@ -1066,7 +1434,9 @@ main {
         font-size: 1.5rem; /* Reduce tamaño de títulos */
         margin-bottom: 1rem;
     }
+    
 
+    
     .footer .footer__grupo1 .red-social {
         justify-content: center; /* Centra redes sociales */
         flex-wrap: wrap; /* Permite que se envuelvan */
@@ -1155,4 +1525,74 @@ main {
         transform: translate(8rem)!important;
     }
     
+}
+.usuario-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    color: #e5dede;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ffffff50;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    font-weight: 300; /* Letra más delgada */
+    transition: all 0.3s ease;
+}
+
+.usuario-info i {
+    font-size: 1.5rem;
+    color: #e5dede;
+}
+
+.usuario-info:hover {
+    color: #6B8E23;
+    border-color: #6B8E23;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-logout {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: #f0f0f0;
+  color: black;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }

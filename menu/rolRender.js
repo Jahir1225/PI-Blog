@@ -1,43 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
     const role = localStorage.getItem("userRole") || "invitado";
     const name = localStorage.getItem("userName") || "Invitado";
-  
-    const welcome = document.getElementById("welcomeMessage");
-    const menu = document.getElementById("menu");
-    const content = document.getElementById("content");
-  
-    welcome.textContent = `Hola, ${name}`;
-  
-    if (role === "admin") {
-      menu.innerHTML = `
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="../publicar/publicar.html">Publicar Blog</a></li>
-          <li><a href="#">Gestionar Usuarios</a></li>
-          <li><a href="../login/login.html">Cerrar Sesión</a></li>
-        </ul>
-      `;
-      content.innerHTML = `<h2>Panel de Administración</h2><p>Administra el contenido del sitio.</p>`;
-    } else if (role === "usuario") {
-      menu.innerHTML = `
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="../blog/blog.html">Ver Blogs</a></li>
-          <li><a href="#">Mi Perfil</a></li>
-          <li><a href="../login/login.html">Cerrar Sesión</a></li>
-        </ul>
-      `;
-      content.innerHTML = `<h2>Bienvenido usuario</h2><p>Disfruta del contenido disponible para ti.</p>`;
-    } else {
-      // invitado
-      menu.innerHTML = `
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="../login/login.html">Iniciar Sesión</a></li>
-          <li><a href="../register/registro.html">Registrarse</a></li>
-        </ul>
-      `;
-      content.innerHTML = `<h2>Bienvenido invitado</h2><p>Inicia sesión para acceder a más funciones.</p>`;
+    const menu = document.getElementById("dynamic-menu");
+
+    const menuItems = {
+        logo: `
+            <li>
+                <div class="header-content__logo-container">
+                    <img src="/img/logo-ecolima.png" alt="Logo">
+                </div>
+            </li>
+        `,
+        home: `<li title="Inicio"><a href="/menu/index.html"><i class="fa-solid fa-house"></i></a></li>`,
+        about: `<li title="¿Quiénes somos?"><a href="/about-us/aboutUs.html"><i class="fa-solid fa-people-group"></i></a></li>`,
+        contact: `<li title="¡Contáctanos!"><a href="/contact/contact.html"><i class="fa-solid fa-envelope"></i></a></li>`,
+        publish: `<li title="Publicar"><a href="/publicaciones/publicaciones.html"><i class="fa-solid fa-file-pen"></i></a></li>`,
+        admin: `<li title="Administración"><a href="/panel-de-administracion/panel-de-administracion.html"><i class="fa-solid fa-user-gear"></i></a></li>`,
+        login: `<li title="Iniciar sesión"><a href="/login/login.html"><i class="fa-solid fa-circle-user"></i></a></li>`,
+        logout: `<li title="Cerrar sesión"><a href="#" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i></a></li>`,
+        userName: `<li class="usuario-info"><i class="fa-solid fa-user"></i> ${name}</li>`,
+        search: `<li title="Buscar"><div class="main-navbar--ctn-icon-search"><i class="fa-solid fa-magnifying-glass" id="icon-search"></i></div></li>`
+    };
+
+    if (menu) {
+        if (role === "admin") {
+            menu.innerHTML = `
+                ${menuItems.logo}
+                ${menuItems.home}
+                ${menuItems.about}
+                ${menuItems.contact}
+                ${menuItems.publish}
+                ${menuItems.admin}
+                ${menuItems.userName}
+                ${menuItems.logout}
+                ${menuItems.search}
+            `;
+        } else if (role === "usuario") {
+            menu.innerHTML = `
+                ${menuItems.logo}
+                ${menuItems.home}
+                ${menuItems.about}
+                ${menuItems.contact}
+                ${menuItems.userName}
+                ${menuItems.logout}
+                ${menuItems.search}
+            `;
+        } else {
+            menu.innerHTML = `
+                ${menuItems.logo}
+                ${menuItems.home}
+                ${menuItems.about}
+                ${menuItems.contact}
+                ${menuItems.login}
+                ${menuItems.search}
+            `;
+        }
     }
-  });
-  
+});
+
+function cerrarSesion() {
+    localStorage.clear();
+    location.href = "/menu/index.html"; // O la ruta real donde ves el contenido como visitante
+}
+
