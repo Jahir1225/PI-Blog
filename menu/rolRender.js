@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         about: `<li title="¿Quiénes somos?"><a href="/about-us/aboutUs.html"><i class="fa-solid fa-people-group"></i></a></li>`,
         contact: `<li title="¡Contáctanos!"><a href="/contact/contact.html"><i class="fa-solid fa-envelope"></i></a></li>`,
         publish: `<li title="Publicar"><a href="/publicaciones/publicaciones.html"><i class="fa-solid fa-file-pen"></i></a></li>`,
-        admin: `<li title="Administración"><a href="/panel-de-administracion/panel-de-administracion.html"><i class="fa-solid fa-user-gear"></i></a></li>`,
+        admin: `<li title="Administración"><a href="/admin/panel-de-administracion.html"><i class="fa-solid fa-user-gear"></i></a></li>`,
         login: `<li title="Iniciar sesión"><a href="/login/login.html"><i class="fa-solid fa-circle-user"></i></a></li>`,
         logout: `<li title="Cerrar sesión"><a href="#" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i></a></li>`,
         userName: `<li class="usuario-info"><i class="fa-solid fa-user"></i> ${name}</li>`,
