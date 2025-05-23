@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         validarCampo(passwordRegex, inputPass, "La contraseña debe tener entre 4 y 12 caracteres.");
     });
 });
-
+//validar_Campos
 export function validarCampo(regex, input, mensaje) {
     const form = input.closest("form");
     const isRegisterForm = form.classList.contains("form-register");

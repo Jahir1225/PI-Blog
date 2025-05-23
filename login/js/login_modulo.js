@@ -77,8 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ✅ Estas funciones deben ir afuera del DOMContentLoaded
-
 function mostrarMensajeError(msg) {
     alertaErrorLogin.textContent = msg;
     alertaErrorLogin.classList.add("alertaError");
