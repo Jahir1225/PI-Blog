@@ -5,7 +5,7 @@ function ocultar_buscador(){
     inputSearch.value ="";
     box_search.style.display="none";
 }
-
+//test
 function mostrar_buscador(){
     bars_search.style.top="5rem";
     cover_ctn_search.style.display="block";
