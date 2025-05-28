@@ -376,22 +376,35 @@ a {
 }
 
 .team-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Diseño responsivo */
-    gap: 2rem;
+    display: flex; /* Cambiado a flexbox para organizar los elementos en una fila */
+    flex-direction: row; /* Asegura que los elementos estén en una fila */
+    justify-content: space-around; /* Distribuye el espacio uniformemente entre los miembros */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
     margin-top: 2rem;
+    width: 95%; /* Ajusta el ancho para que quepa dentro del contenedor */
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si no hay suficiente espacio */
+    gap: 10px; /* Espacio entre los miembros */
 }
 
 .team-member {
     text-align: center;
-    max-width: 200px;
+    max-width: 180px; /* Ajusta el ancho máximo para controlar el tamaño de la imagen */
+    flex: 1; /* Distribuye el espacio disponible equitativamente entre los miembros */
+    margin: 0 10px; /* Agrega un poco de espacio horizontal entre los miembros */
+    min-width: 150px; /* Asegura un ancho mínimo para evitar que se pongan demasiado pequeños */
 }
 
 .team-member img {
-    width: 100%;
+    width: 80%; /* Ajusta el ancho de la imagen dentro del contenedor */
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block; /* Asegura que la imagen sea un elemento de bloque */
+    margin: 0 auto; /* Centra la imagen dentro del div del miembro del equipo */
+    max-height: 180px; /* Limita la altura máxima de la imagen */
+    object-fit: cover; /* Mantiene la relación de aspecto y cubre el área circular */
 }
 
 .team-member img:hover {
@@ -400,23 +413,13 @@ a {
 }
 
 .team-member h4 {
-    margin-top: 1rem; /* Espaciado superior */
-    font-size: 1.2rem; /* Tamaño del texto */
-    color: #333; /* Color del texto */
-    font-weight: bold; /* Aplica negritas */
-    font-family: Arial, sans-serif; /* Cambia la fuente a Arial */
-    text-transform: uppercase; /* Convierte el texto a mayúsculas */
-    text-align: center; /* Centra el texto */
-    letter-spacing: 1px; /* Espaciado entre letras */
+    margin-top: 0.5rem; /* Reduce el espaciado superior */
+    font-size: 1rem; /* Ajusta el tamaño de la fuente */
 }
 
 .team-member p {
-    font-size: 1rem; /* Tamaño del texto */
-    color: #777; /* Color del texto */
-    font-weight: bold; /* Aplica negritas */
-    font-family: Arial, sans-serif; /* Cambia la fuente a Arial */
-    text-align: center; /* Centra el texto */
-    margin-top: 0.5rem; /* Espaciado superior */
+    font-size: 0.9rem; /* Ajusta el tamaño de la fuente */
+    margin-top: 0.2rem; /* Reduce el espaciado superior */
 }
 
 /* Animaciones */
@@ -961,8 +964,20 @@ main {
         width: 100%;
     }
 
+    /* Media query for smaller screens to handle potential overflow */
     .team-container {
-        grid-template-columns: 1fr;
+        flex-direction: column; /* Apila los miembros verticalmente en pantallas más pequeñas */
+        gap: 20px; /* Espacio vertical entre los miembros apilados */
+    }
+
+    .team-member {
+        max-width: 200px; /* Ajusta el ancho máximo para el apilamiento vertical */
+        margin: 15px auto; /* Agrega espaciado vertical y centra */
+    }
+
+    .team-member img {
+        width: 60%; /* Ajusta el ancho de la imagen para el apilamiento vertical */
+        max-height: none; /* Elimina la altura máxima para el diseño vertical */
     }
 }
 
