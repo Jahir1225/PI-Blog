@@ -1,18 +1,17 @@
-/* --- Variables CSS para una fácil actualización --- */
 :root {
     /* Colores */
-    --primary-green: #388E3C; /* Verde principal (oscuro) */
-    --light-green: #C8E6C9;   /* Verde claro (fondo información) */
-    --accent-green: #66BB6A;  /* Verde de acento (botones) */
-    --dark-grey-text: #333;   /* Color de texto oscuro */
-    --medium-grey-text: #555; /* Color de texto medio */
-    --light-grey-icon: #a7a7a7; /* Color de iconos */
-    --input-border-color: #4E4E4E; /* Borde de input transparente */
-    --white-bg: #fff;         /* Fondo blanco */
-    --error-bg: #ffe0e0;      /* Fondo de alerta de error */
-    --error-text: #d8000c;    /* Texto de alerta de error */
-    --success-bg: #0ca828;    /* Fondo de alerta de éxito */
-    --link-blue: #007bff;     /* Color de enlaces */
+    --primary-green: #388E3C; 
+    --light-green: #C8E6C9;  
+    --accent-green: #66BB6A; 
+    --dark-grey-text: #333;   
+    --medium-grey-text: #555; 
+    --light-grey-icon: #a7a7a7; 
+    --input-border-color: #4E4E4E;
+    --white-bg: #fff;
+    --error-bg: #ffe0e0;
+    --error-text: #d8000c;
+    --success-bg: #0ca828;
+    --link-blue: #007bff;
 
     /* Fuentes */
     --font-montserrat: 'Montserrat', sans-serif;
@@ -40,7 +39,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Usar min-height para permitir que el contenido crezca */
+    min-height: 100vh;
     background-image: url(../img/fondo_login.png);
     background-size: cover;
     background-position: center;
@@ -53,18 +52,18 @@ body {
     height: 500px;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: var(--shadow-container); /* Usando variable */
-    background-color: var(--white-bg); /* Usando variable */
-    max-width: 900px; /* Ya estaba, pero lo muevo aquí para coherencia */
-    margin: 10px; /* Ya estaba, lo consolido */
-    transition: var(--transition-slow-ease); /* Usando variable */
+    box-shadow: var(--shadow-container); 
+    background-color: var(--white-bg);
+    max-width: 900px; 
+    margin: 10px;
+    transition: var(--transition-slow-ease);
 }
 
 .container-form.hide {
     opacity: 0;
     transform: scale(0.9);
     pointer-events: none;
-    position: absolute; /* Asegura que no ocupe espacio */
+    position: absolute;
 }
 
 /* --- Secciones de Información y Formulario --- */
@@ -78,7 +77,7 @@ body {
 }
 
 .information {
-    background-color: var(--light-green); /* Usando variable */
+    background-color: var(--light-green); 
     text-align: center;
 }
 
@@ -86,32 +85,32 @@ body {
 .info_childs h2,
 .form-information-childs h2 {
     font-size: 2rem;
-    color: var(--dark-grey-text); /* Usando variable */
+    color: var(--dark-grey-text); 
     margin-bottom: 10px;
 }
 
 /* --- Párrafos en ambas secciones --- */
 .info_childs p,
 .form-information-childs p {
-    color: var(--medium-grey-text); /* Usando variable */
+    color: var(--medium-grey-text);
     margin-bottom: 20px;
-    font-size: 0.95rem; /* Específico para .form-information-childs p, lo aplico a ambos para consistencia */
+    font-size: 0.95rem; 
 }
 
 /* --- Botones de Información (cambio de panel) --- */
 .info_childs input {
     background-color: transparent;
-    border: 2px solid var(--input-border-color); /* Usando variable */
+    border: 2px solid var(--input-border-color);
     border-radius: 20px;
     padding: 10px 20px;
-    color: var(--input-border-color); /* Usando variable */
+    color: var(--input-border-color);
     cursor: pointer;
-    transition: var(--transition-ease); /* Usando variable */
+    transition: var(--transition-ease); 
 }
 
 .info_childs input:hover {
-    background-color: var(--primary-green); /* Usando variable */
-    color: var(--white-bg); /* Usando variable */
+    background-color: var(--primary-green);
+    color: var(--white-bg); 
     border: none;
 }
 
@@ -124,39 +123,39 @@ body {
 .form-information-childs form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Ya estaba, lo consolido */
+    gap: 15px; 
     align-items: stretch;
 }
 
 /* --- Estilos para los campos de entrada (label y input) --- */
-.form-group { /* Agregado para envolver label e input juntos y darles altura mínima */
-    min-height: 70px; /* Ya estaba, lo consolido */
+.form-group { 
+    min-height: 70px;
 }
 
 .form label,
-.password-wrapper { /* Consolido estilos de label y password-wrapper */
+.password-wrapper {
     display: flex;
     align-items: center;
-    background-color: var(--white-bg); /* Usando variable */
+    background-color: var(--white-bg);
     padding: 10px;
     border-radius: 20px;
-    box-shadow: var(--shadow-light); /* Usando variable */
+    box-shadow: var(--shadow-light); 
 }
 
 .form label i,
-.password-wrapper i { /* Consolido estilos de iconos */
-    color: var(--light-grey-icon); /* Usando variable */
+.password-wrapper i {
+    color: var(--light-grey-icon); 
     margin-right: 10px;
 }
 
 .form label input,
-.password-wrapper input { /* Consolido estilos de inputs */
+.password-wrapper input { 
     border: none;
     outline: none;
     flex: 1;
-    background-color: var(--white-bg); /* Usando variable */
+    background-color: var(--white-bg);
     font-size: 1rem;
-    color: var(--dark-grey-text); /* Usando variable */
+    color: var(--dark-grey-text);
 }
 
 .password-wrapper .toggle-password {
@@ -167,76 +166,75 @@ body {
 
 /* --- Botón de Submit --- */
 .form input[type="submit"] {
-    background-color: var(--accent-green); /* Usando variable */
-    color: var(--white-bg); /* Usando variable */
+    background-color: var(--accent-green);
+    color: var(--white-bg);
     border: none;
     padding: 12px;
     border-radius: 20px;
     font-size: 1rem;
     cursor: pointer;
-    transition: var(--transition-ease); /* Usando variable */
+    transition: var(--transition-ease);
 }
 
 .form input[type="submit"]:hover {
-    background-color: var(--primary-green); /* Usando variable */
+    background-color: var(--primary-green);
 }
 
 /* --- Mensajes de Alerta --- */
 .alerta-error {
-    background-color: var(--error-bg); /* Usando variable */
-    color: var(--error-text); /* Usando variable */
-    border-left: 5px solid var(--error-text); /* Usando variable */
+    background-color: var(--error-bg); 
+    color: var(--error-text); 
+    border-left: 5px solid var(--error-text); 
     padding: 10px 15px;
     border-radius: 5px;
     margin-top: 10px;
     font-size: 0.9rem;
     font-weight: 500;
-    display: none; /* Por defecto oculto */
-    text-align: center; /* Consolidado */
+    display: none;
+    text-align: center;
 }
 
-.alerta-exito { /* Renombrado de .alertaExito a .alerta-exito para consistencia */
-    display: none; /* Por defecto oculto */
+.alerta-exito { 
+    display: none; 
     font-size: 0.85rem;
-    margin-top: -10px; /* Consolidado */
-    text-align: center; /* Consolidado */
-    background-color: var(--success-bg); /* Usando variable */
-    color: var(--white-bg); /* Usando variable */
+    margin-top: -10px;
+    text-align: center;
+    background-color: var(--success-bg);
+    color: var(--white-bg);
     padding: 8px 12px;
     border-radius: 6px;
 }
 
-.mensaje-error { /* Mensaje de error específico bajo un input */
+.mensaje-error {
     font-size: 0.75rem;
-    color: var(--error-text); /* Usando variable */
+    color: var(--error-text);
     margin-top: 5px;
     padding-left: 5px;
     text-align: left;
 }
 
-/* --- Loader --- */
 #loader {
     margin-top: 10px;
     font-size: 0.9rem;
-    color: var(--dark-grey-text); /* Usando variable */
-    display: none; /* Por defecto oculto */
+    color: var(--dark-grey-text);
+    display: none; 
     text-align: center;
 }
 
-/* --- Clases de Utilidad --- */
+
 .hide {
     display: none;
 }
 
 /* --- Enlace "Olvidaste tu contraseña?" --- */
 .forgot-password {
-    display: inline-block; /* Permite aplicar márgenes verticales */
-    margin-top: -5px; /* Ajuste visual */
+    display: inline-block;
+    margin-top: -5px;
     margin-bottom: 10px;
     font-size: 0.85rem;
-    color: var(--link-blue); /* Usando variable */
+    color: var(--link-blue);
     text-decoration: none;
-    text-align: center; /* Centrado dentro de su contenedor */
+    text-align: center; 
 }
 
 .forgot-password:hover {
@@ -248,19 +246,19 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: var(--primary-green); /* Usando variable */
-    color: var(--white-bg); /* Usando variable */
+    background-color: var(--primary-green);
+    color: var(--white-bg);
     padding: 10px 15px;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 500;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: var(--transition-ease); /* Usando variable */
+    transition: var(--transition-ease);
     z-index: 1000;
 }
 
 .boton_regresar:hover {
-    background-color: #45a049; /* Tono ligeramente más oscuro, podría ser una variable si se usa más */
+    background-color: #45a049;
 }
 
 /* --- Media Queries (Responsiveness) --- */
@@ -269,13 +267,13 @@ body {
         flex-direction: column;
         height: auto;
         width: 90%;
-        max-width: unset; /* Permite que el 90% funcione sin limitación de max-width */
+        max-width: unset;
     }
 
     .information,
     .form-information {
-        border-radius: 0; /* No es necesario si se sobrescribe la del contenedor principal */
-        padding: 30px 20px; /* Ajuste de padding para pantallas más pequeñas */
+        border-radius: 0;
+        padding: 30px 20px;
     }
 
     .form-information-childs form {
@@ -284,6 +282,6 @@ body {
 
     .info_childs p,
     .form-information-childs p {
-        margin-bottom: 15px; /* Ajuste para un espacio más compacto */
+        margin-bottom: 15px;
     }
 }
