@@ -1,293 +1,289 @@
+/* --- Variables CSS para una fácil actualización --- */
+:root {
+    /* Colores */
+    --primary-green: #388E3C; /* Verde principal (oscuro) */
+    --light-green: #C8E6C9;   /* Verde claro (fondo información) */
+    --accent-green: #66BB6A;  /* Verde de acento (botones) */
+    --dark-grey-text: #333;   /* Color de texto oscuro */
+    --medium-grey-text: #555; /* Color de texto medio */
+    --light-grey-icon: #a7a7a7; /* Color de iconos */
+    --input-border-color: #4E4E4E; /* Borde de input transparente */
+    --white-bg: #fff;         /* Fondo blanco */
+    --error-bg: #ffe0e0;      /* Fondo de alerta de error */
+    --error-text: #d8000c;    /* Texto de alerta de error */
+    --success-bg: #0ca828;    /* Fondo de alerta de éxito */
+    --link-blue: #007bff;     /* Color de enlaces */
+
+    /* Fuentes */
+    --font-montserrat: 'Montserrat', sans-serif;
+
+    /* Sombras */
+    --shadow-light: 0 2px 5px rgba(0, 0, 0, .1);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, .2);
+    --shadow-container: 0 5px 7px rgba(0, 0, 0, .1);
+
+    /* Transiciones */
+    --transition-ease: all 0.3s ease;
+    --transition-slow-ease: all 0.8s ease;
+}
+
+/* --- Reseteo Global --- */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-montserrat);
 }
 
+/* --- Estilos del Body --- */
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-image: url(../img/fondo_login.png);
-  background-size: cover;
-  background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Usar min-height para permitir que el contenido crezca */
+    background-image: url(../img/fondo_login.png);
+    background-size: cover;
+    background-position: center;
 }
 
+/* --- Contenedor Principal del Formulario --- */
 .container-form {
-  display: flex;
-  width: 900px;
-  height: 500px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
-  background-color: #fff;
-}
-
-.information,
-.form-information {
-  flex: 1;
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.information {
-  background-color: 	#C8E6C9;
-  text-align: center;
-}
-
-.info_childs h2,
-.form-information-childs h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.info_childs p,
-.form-information-childs p {
-  color: #555;
-  margin-bottom: 20px;
-}
-
-.info_childs input {
-  background-color: transparent;
-  border: 2px solid 		#4E4E4E;
-  border-radius: 20px;
-  padding: 10px 20px;
-  color: 		#4E4E4E;
-  cursor: pointer;
-  transition: background-color .3s ease;
-}
-
-.info_childs input:hover {
-  background-color: 	#388E3C;
-  color: white;
-  border: none;
-}
-
-.form-information-childs form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: stretch;
-}
-
-.form label {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 10px;
-  border-radius: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-}
-
-.form label i {
-  color: #a7a7a7;
-  margin-right: 10px;
-}
-
-.form label input {
-  border: none;
-  outline: none;
-  flex: 1;
-  background-color: white;
-  font-size: 1rem;
-  color: #333;
-}
-
-.password-wrapper {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  padding: 10px;
-  border-radius: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-}
-
-.password-wrapper input {
-  border: none;
-  outline: none;
-  flex: 1;
-  font-size: 1rem;
-  background-color: white;
-  color: #333;
-}
-
-.password-wrapper i {
-  color: #a7a7a7;
-  margin-right: 10px;
-}
-
-.password-wrapper .toggle-password {
-  margin-left: auto;
-  margin-right: 0;
-  cursor: pointer;
-}
-
-.form input[type="submit"] {
-  background-color: #66BB6A;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color .3s ease;
-}
-
-.form input[type="submit"]:hover {
-  background-color: 	#388E3C;
-}
-
-.alerta-error,
-.alerta-exito {
-  display: none;
-  font-size: 0.85rem;
-  margin-top: -10px;
-  text-align: center;
-}
-
-.alerta-error {
-  background-color: #ffe0e0;
-  color: #d8000c;
-  border-left: 5px solid #d8000c;
-  padding: 10px 15px;
-  border-radius: 5px;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: none;
-}
-
-
-.alertaExito {
-  display: block;
-  color: white;
-  background-color: #0ca828;
-  padding: 8px 12px;
-  border-radius: 6px;
-}
-
-#loader {
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #333;
-  display: none;
-  text-align: center;
-}
-
-.hide {
-  display: none;
-}
-
-.forgot-password {
-  text-align: left;
-  font-size: 0.85rem;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-
-.boton_regresar {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: 500;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-  z-index: 1000;
-}
-
-.boton_regresar:hover {
-  background-color: #45a049;
-}
-
-@media screen and (max-width: 750px) {
-  .container-form {
-    flex-direction: column;
-    height: auto;
-    width: 90%;
-  }
-
-  .information,
-  .form-information {
-    border-radius: 0;
-  }
-
-  .form-information-childs form {
-    gap: 10px;
-  }
-}
-.form-information-childs {
-  padding: 0 30px;
-  text-align: center; /* Alinea todos los hijos al centro */
-}
-
-.form-information-childs p {
-  margin-top: -10px;
-  margin-bottom: 20px;
-  color: #555;
-  font-size: 0.95rem;
-}
-
-.forgot-password {
-  display: inline-block;
-  margin-top: -5px;
-  margin-bottom: 10px;
-  font-size: 0.85rem;
-  color: #007bff;
-  text-decoration: none;
-  text-align: center;
-}
-
-.forgot-password:hover {
-  text-decoration: underline;
-}
-.container-form {
-  display: flex;
-  border-radius: 20px;
-  box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
-  height: 500px;
-  max-width: 900px;
-  margin: 10px;
-  transition: all 0.8s ease; /* ✅ transiciones suaves */
-  opacity: 1;
-  transform: scale(1);
+    display: flex;
+    width: 900px;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-container); /* Usando variable */
+    background-color: var(--white-bg); /* Usando variable */
+    max-width: 900px; /* Ya estaba, pero lo muevo aquí para coherencia */
+    margin: 10px; /* Ya estaba, lo consolido */
+    transition: var(--transition-slow-ease); /* Usando variable */
 }
 
 .container-form.hide {
-  opacity: 0;
-  transform: scale(0.9);
-  pointer-events: none;
-  position: absolute;
-}
-.mensaje-error {
-  font-size: 0.75rem;
-  color: #e74c3c;
-  margin-top: 5px;
-  padding-left: 5px;
-  text-align: left;
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    position: absolute; /* Asegura que no ocupe espacio */
 }
 
-
-.form .form-group {
-    min-height: 70px;
+/* --- Secciones de Información y Formulario --- */
+.information,
+.form-information {
+    flex: 1;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+.information {
+    background-color: var(--light-green); /* Usando variable */
+    text-align: center;
+}
 
+/* --- Títulos en ambas secciones --- */
+.info_childs h2,
+.form-information-childs h2 {
+    font-size: 2rem;
+    color: var(--dark-grey-text); /* Usando variable */
+    margin-bottom: 10px;
+}
 
+/* --- Párrafos en ambas secciones --- */
+.info_childs p,
+.form-information-childs p {
+    color: var(--medium-grey-text); /* Usando variable */
+    margin-bottom: 20px;
+    font-size: 0.95rem; /* Específico para .form-information-childs p, lo aplico a ambos para consistencia */
+}
 
+/* --- Botones de Información (cambio de panel) --- */
+.info_childs input {
+    background-color: transparent;
+    border: 2px solid var(--input-border-color); /* Usando variable */
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: var(--input-border-color); /* Usando variable */
+    cursor: pointer;
+    transition: var(--transition-ease); /* Usando variable */
+}
 
+.info_childs input:hover {
+    background-color: var(--primary-green); /* Usando variable */
+    color: var(--white-bg); /* Usando variable */
+    border: none;
+}
 
+/* --- Contenido del Formulario --- */
+.form-information-childs {
+    padding: 0 30px;
+    text-align: center;
+}
 
+.form-information-childs form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Ya estaba, lo consolido */
+    align-items: stretch;
+}
+
+/* --- Estilos para los campos de entrada (label y input) --- */
+.form-group { /* Agregado para envolver label e input juntos y darles altura mínima */
+    min-height: 70px; /* Ya estaba, lo consolido */
+}
+
+.form label,
+.password-wrapper { /* Consolido estilos de label y password-wrapper */
+    display: flex;
+    align-items: center;
+    background-color: var(--white-bg); /* Usando variable */
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-light); /* Usando variable */
+}
+
+.form label i,
+.password-wrapper i { /* Consolido estilos de iconos */
+    color: var(--light-grey-icon); /* Usando variable */
+    margin-right: 10px;
+}
+
+.form label input,
+.password-wrapper input { /* Consolido estilos de inputs */
+    border: none;
+    outline: none;
+    flex: 1;
+    background-color: var(--white-bg); /* Usando variable */
+    font-size: 1rem;
+    color: var(--dark-grey-text); /* Usando variable */
+}
+
+.password-wrapper .toggle-password {
+    margin-left: auto;
+    margin-right: 0;
+    cursor: pointer;
+}
+
+/* --- Botón de Submit --- */
+.form input[type="submit"] {
+    background-color: var(--accent-green); /* Usando variable */
+    color: var(--white-bg); /* Usando variable */
+    border: none;
+    padding: 12px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition-ease); /* Usando variable */
+}
+
+.form input[type="submit"]:hover {
+    background-color: var(--primary-green); /* Usando variable */
+}
+
+/* --- Mensajes de Alerta --- */
+.alerta-error {
+    background-color: var(--error-bg); /* Usando variable */
+    color: var(--error-text); /* Usando variable */
+    border-left: 5px solid var(--error-text); /* Usando variable */
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: none; /* Por defecto oculto */
+    text-align: center; /* Consolidado */
+}
+
+.alerta-exito { /* Renombrado de .alertaExito a .alerta-exito para consistencia */
+    display: none; /* Por defecto oculto */
+    font-size: 0.85rem;
+    margin-top: -10px; /* Consolidado */
+    text-align: center; /* Consolidado */
+    background-color: var(--success-bg); /* Usando variable */
+    color: var(--white-bg); /* Usando variable */
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.mensaje-error { /* Mensaje de error específico bajo un input */
+    font-size: 0.75rem;
+    color: var(--error-text); /* Usando variable */
+    margin-top: 5px;
+    padding-left: 5px;
+    text-align: left;
+}
+
+/* --- Loader --- */
+#loader {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: var(--dark-grey-text); /* Usando variable */
+    display: none; /* Por defecto oculto */
+    text-align: center;
+}
+
+/* --- Clases de Utilidad --- */
+.hide {
+    display: none;
+}
+
+/* --- Enlace "Olvidaste tu contraseña?" --- */
+.forgot-password {
+    display: inline-block; /* Permite aplicar márgenes verticales */
+    margin-top: -5px; /* Ajuste visual */
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: var(--link-blue); /* Usando variable */
+    text-decoration: none;
+    text-align: center; /* Centrado dentro de su contenedor */
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* --- Botón Regresar --- */
+.boton_regresar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--primary-green); /* Usando variable */
+    color: var(--white-bg); /* Usando variable */
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-ease); /* Usando variable */
+    z-index: 1000;
+}
+
+.boton_regresar:hover {
+    background-color: #45a049; /* Tono ligeramente más oscuro, podría ser una variable si se usa más */
+}
+
+/* --- Media Queries (Responsiveness) --- */
+@media screen and (max-width: 750px) {
+    .container-form {
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+        max-width: unset; /* Permite que el 90% funcione sin limitación de max-width */
+    }
+
+    .information,
+    .form-information {
+        border-radius: 0; /* No es necesario si se sobrescribe la del contenedor principal */
+        padding: 30px 20px; /* Ajuste de padding para pantallas más pequeñas */
+    }
+
+    .form-information-childs form {
+        gap: 10px;
+    }
+
+    .info_childs p,
+    .form-information-childs p {
+        margin-bottom: 15px; /* Ajuste para un espacio más compacto */
+    }
+}
