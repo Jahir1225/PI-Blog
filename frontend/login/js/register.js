@@ -18,20 +18,28 @@ const alertaExito = document.querySelector(".form-register .alerta-exito");
 
 document.addEventListener("DOMContentLoaded", () => {
     formRegister.addEventListener("submit", (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        if (estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword) {
-            enviarFormulario(formRegister, alertaError, alertaExito);
-        } else {
-            alertaError.textContent = "Por favor, completa todos los campos correctamente.";
-            alertaError.classList.add("alertaError");
-            alertaError.style.display = "block";
-            setTimeout(() => {
-                alertaError.classList.remove("alertaError");
-                alertaError.style.display = "none";
-            }, 3000);
-        }
-    });
+    // Validar en tiempo real ANTES de enviar
+    validarCampo(userNameRegex, inputUser, "El usuario debe tener de 4 a 16 caracteres, solo letras, números, guiones y guiones bajos.");
+    validarCampo(emailRegex, inputEmail, "El correo no es válido.");
+    validarCampo(passwordRegex, inputPass, "La contraseña debe tener entre 4 y 12 caracteres.");
+
+    const todoValido = estadoValidacionCampos.userName && estadoValidacionCampos.userEmail && estadoValidacionCampos.userPassword;
+
+    if (todoValido) {
+        enviarFormulario(formRegister, alertaError, alertaExito);
+    } else {
+        alertaError.textContent = "Por favor, completa todos los campos correctamente.";
+        alertaError.classList.add("alertaError");
+        alertaError.style.display = "block";
+        setTimeout(() => {
+            alertaError.classList.remove("alertaError");
+            alertaError.style.display = "none";
+        }, 3000);
+    }
+});
+
 
     inputUser.addEventListener("input", () => {
         validarCampo(userNameRegex, inputUser, "El usuario debe tener de 4 a 16 caracteres, solo letras, números, guiones y guiones bajos.");
@@ -62,8 +70,14 @@ export function validarCampo(regex, input, mensaje) {
         container.appendChild(mensajeError);
     }
 
-    mensajeError.textContent = isValid ? "" : mensaje;
-    mensajeError.style.display = isValid ? "none" : "block";
+   if (!isValid) {
+    mensajeError.textContent = mensaje;
+    mensajeError.classList.add("activo");
+} else {
+    mensajeError.textContent = "";
+    mensajeError.classList.remove("activo");
+}
+
 }
 
 //validar_Campos
@@ -82,24 +96,27 @@ export function enviarFormulario(form, alertaError, alertaExito) {
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            alertaExito.textContent = "Te registraste correctamente";
-            alertaExito.classList.add("alertaExito");
-            alertaExito.style.display = "block";
+    alertaExito.textContent = "Te registraste correctamente";
+    alertaExito.classList.add("alertaExito");
+    alertaExito.style.display = "block";
 
-            alertaError.classList.remove("alertaError");
-            alertaError.style.display = "none";
+    alertaError.classList.remove("alertaError");
+    alertaError.style.display = "none";
 
-            form.reset();
+    form.reset();
 
-            estadoValidacionCampos.userName = false;
-            estadoValidacionCampos.userEmail = false;
-            estadoValidacionCampos.userPassword = false;
+    estadoValidacionCampos.userName = false;
+    estadoValidacionCampos.userEmail = false;
+    estadoValidacionCampos.userPassword = false;
 
-            setTimeout(() => {
-                alertaExito.classList.remove("alertaExito");
-                alertaExito.style.display = "none";
-            }, 3000);
-        } else {
+    // ⏳ Espera 2 segundos y redirige al login
+    setTimeout(() => {
+        alertaExito.classList.remove("alertaExito");
+        alertaExito.style.display = "none";
+        window.location.href = "login.html"; // 🔁 Redirección al login
+    }, 2000);
+}
+else {
             mostrarError(data.message || "Error al registrarse");
         }
     })
